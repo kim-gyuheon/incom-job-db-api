@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: job-db-api
+    runtime: python
+    plan: free
+    rootDir: api
+    buildCommand: pip install -r requirements.txt
+    # Render가 주입하는 $PORT로 바인딩해야 한다 (고정 포트 사용 시 배포 실패)
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      # LLM 대화 API(/sessions)를 쓰려면 Render 대시보드에서 직접 값을 입력한다.
+      # sync: false → 대시보드에서 수동 입력, 저장소에 키가 남지 않음
+      - key: ANTHROPIC_API_KEY
+        sync: false

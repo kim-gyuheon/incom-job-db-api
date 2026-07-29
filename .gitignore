@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+api/.env
+
+# 가상환경은 커밋하지 않는다 (용량이 크고 OS별로 다름)
+.venv/
+venv/

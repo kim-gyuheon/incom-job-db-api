@@ -1,0 +1,10 @@
+{
+    "python.defaultInterpreterPath": "C:\\Users\\HONEY\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+    "python.analysis.extraPaths": ["${workspaceFolder}/api"],
+    "files.exclude": {
+        "**/__pycache__": true
+    },
+    "[python]": {
+        "editor.formatOnSave": false
+    }
+}
