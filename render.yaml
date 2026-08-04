@@ -4,6 +4,8 @@ services:
     runtime: python
     plan: free
     rootDir: api
+    # master에 푸시하면 자동 재배포
+    autoDeploy: true
     buildCommand: pip install -r requirements.txt
     # Render가 주입하는 $PORT로 바인딩해야 한다 (고정 포트 사용 시 배포 실패)
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
