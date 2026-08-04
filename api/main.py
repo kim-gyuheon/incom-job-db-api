@@ -102,6 +102,22 @@ def list_categories():
     return CategoryListResponse(total=len(items), items=items)
 
 
+@app.get("/")
+def root():
+    """루트로 접속했을 때 사용 가능한 엔드포인트를 안내한다."""
+    return {
+        "service": "희망직종 길잡이 API",
+        "docs": "/docs",
+        "endpoints": {
+            "GET /api/jobs": "직무 목록 전체",
+            "GET /api/jobs?recommendableOnly=true": "추천 대상 직무만",
+            "GET /api/jobs?categoryIds=1,2": "대분류 id로 필터",
+            "GET /api/categories": "대분류 목록",
+            "GET /api/health": "상태 확인",
+        },
+    }
+
+
 @app.get("/api/health")
 @app.get("/health")
 def health():
