@@ -4,3 +4,7 @@ anthropic
 pydantic
 # stt.py가 Whisper 전사 API를 직접 호출한다 (anthropic이 끌어오지만 명시해 둔다)
 httpx
+# voice_engine.py: skillmatch-voice-backend의 82축 코사인 유사도 엔진 (engine/, tagging.py,
+# vectorizing.py). numpy는 매칭 계산, pandas는 부팅 시 82축/barrier CSV 적재에 쓴다.
+numpy
+pandas
