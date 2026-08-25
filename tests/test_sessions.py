@@ -70,3 +70,27 @@ def test_create_session_triggers_sweep_of_old_sessions(temp_job_db):
     store.create_session()  # 이 호출이 sweep을 트리거해야 한다
 
     assert store.get_session(old["id"]) is None
+
+
+def test_sweep_does_not_choke_on_more_rows_than_sqlite_param_limit(temp_job_db):
+    """회귀 테스트: SELECT로 id를 모아 IN (?,?,?...)으로 지우던 예전 구현은 정리 대상이
+    SQLite 바인드 파라미터 상한(보통 999개)을 넘으면 "too many SQL variables"로 죽었고,
+    그게 create_session() 안에서 터져서 세션 생성 자체가 막혔다. 서브쿼리 기반으로 고친
+    뒤에는 몇 개가 쌓였든 안전해야 한다."""
+    STALE_COUNT = 1200  # 옛 구현이 쓰던 SQLite 파라미터 상한(999)보다 많게
+    old_cutoff = store.to_sql(store.utcnow() - timedelta(hours=2))
+    # create_session()이 자기 커넥션을 따로 여니까(중첩하면 "database is locked"),
+    # 세션을 다 만든 다음에 한 번에 만료 처리한다. IN (id...) 대신 전체를 만료시켜서
+    # 여기서도 같은 파라미터 상한 문제를 안 만든다.
+    for _ in range(STALE_COUNT):
+        store.create_session()
+    with db_module.get_db() as db:
+        db.execute("UPDATE sessions SET expires_at = ?", (old_cutoff,))
+
+    with db_module.get_db() as db:
+        swept = store._sweep_expired_sessions(db)  # 예전 구현이면 여기서 예외가 났다
+
+    assert swept == STALE_COUNT
+    with db_module.get_db() as db:
+        remaining = db.execute("SELECT COUNT(*) AS n FROM sessions").fetchone()["n"]
+    assert remaining == 0

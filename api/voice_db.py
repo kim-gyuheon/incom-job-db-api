@@ -273,29 +273,33 @@ def end_session(session_id: str) -> None:
 RETENTION_GRACE_SECONDS = 3600
 
 
+_STALE_SESSION_IDS_SQL = """
+    SELECT id FROM sessions
+     WHERE (ended_at IS NOT NULL AND ended_at < ?)
+        OR (expires_at IS NOT NULL AND expires_at < ?)
+"""
+
+
 def _sweep_expired_sessions(db) -> int:
     """만료(또는 명시적 종료)된 지 RETENTION_GRACE_SECONDS 이상 지난 세션과 그 답변·추천을
-    지운다. FK cascade 여부가 불확실해서 자식 테이블부터 명시적으로 지운다."""
-    cutoff = to_sql(utcnow() - timedelta(seconds=RETENTION_GRACE_SECONDS))
-    stale_ids = [
-        r["id"]
-        for r in db.execute(
-            """
-            SELECT id FROM sessions
-             WHERE (ended_at IS NOT NULL AND ended_at < ?)
-                OR (expires_at IS NOT NULL AND expires_at < ?)
-            """,
-            (cutoff, cutoff),
-        )
-    ]
-    if not stale_ids:
-        return 0
+    지운다. FK cascade 여부가 불확실해서 자식 테이블부터 명시적으로 지운다.
 
-    placeholders = ",".join("?" for _ in stale_ids)
+    2026-08-26 QA 수정(Claude Code): 처음엔 대상 id를 파이썬으로 모아서
+    `WHERE id IN (?,?,?...)`로 지웠는데, 쌓인 만료 세션이 SQLite 바인드 파라미터 상한
+    (많은 빌드에서 999개)을 넘으면 "too many SQL variables"로 예외가 나고, 이게
+    create_session() 안에서 통째로 터져서 세션 생성 자체가 막힌다 — 정리 루틴 하나 때문에
+    전체 서비스가 멈추는 셈. 그래서 id를 파이썬으로 들고 다니지 않고 서브쿼리로 바로
+    지운다 — 몇 개가 지워지든 바인드 파라미터는 쿼리당 2개(컷오프 두 번)로 고정된다.
+    """
+    cutoff = to_sql(utcnow() - timedelta(seconds=RETENTION_GRACE_SECONDS))
+    params = (cutoff, cutoff)
+
     for table in ("session_recommendations", "session_answers", "session_voice_answers"):
-        db.execute(f"DELETE FROM {table} WHERE session_id IN ({placeholders})", stale_ids)
-    db.execute(f"DELETE FROM sessions WHERE id IN ({placeholders})", stale_ids)
-    return len(stale_ids)
+        db.execute(
+            f"DELETE FROM {table} WHERE session_id IN ({_STALE_SESSION_IDS_SQL})", params
+        )
+    cursor = db.execute(f"DELETE FROM sessions WHERE id IN ({_STALE_SESSION_IDS_SQL})", params)
+    return cursor.rowcount if cursor.rowcount is not None and cursor.rowcount >= 0 else 0
 
 
 def touch_session(session_id: str, last_step: Optional[str] = None) -> None:
