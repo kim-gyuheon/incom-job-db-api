@@ -77,6 +77,18 @@ EXCLUDED_JOB_NAMES: set = {
     "조세행정사무원", "관세행정사무원", "병무행정사무원", "일반행정공무원", "법원공무원",
 }
 
+# 2026-08-26: 반대 방향(과잉 제외) 1차 세분화 — cat1/cat2를 통째로 뺐을 때 같이 빠진
+# 개별 직업 중, 그 카테고리의 대표 자격(변호사시험/의사면허/4년제 이공계 학위 등)이
+# 아니라 국가자격시험 하나로 취득 가능해서 실제로는 접근 가능한 직업만 다시 넣는다.
+# (요양보호사·경비원처럼 이 앱에 이미 있는 "자격증은 있지만 시험으로 취득 가능한" 직업과
+# 같은 성격 — requires_cert=1 + cert_note로 자격 필요 사실은 그대로 안내한다.)
+ALLOWED_EXCEPTIONS: set = {
+    "법률사무원",  # 법률직 cat2 전체 제외에 같이 빠짐 — 변호사시험이 아니라 법률사무소
+                  # 사무보조 업무라 접근 가능한 사무직에 가까움 (requires_cert=0)
+    "간호조무사",  # 보건·의료직 cat1 전체 제외에 같이 빠짐 — 간호조무사 국가시험(학위
+                  # 불필요)으로 취득 가능해서 요양보호사와 같은 성격 (requires_cert=1)
+}
+
 # barrier 태그(우리 tag-keyword-dictionary.json)와 barrier-review-combined.csv의
 # barrier_id는 원래 같은 어휘라 별도 매핑이 필요 없다(skillmatch-voice-backend와 동일 데이터).
 
@@ -165,8 +177,11 @@ def _exclude_credential_gated_jobs(db) -> int:
 
     EXCLUDED_CATEGORY_LEVELS/EXCLUDED_JOB_NAMES 참고 — 왜 이게 필요한지는 그 위 주석에
     적어 둔 실측 사례(돌봄 답변 -> 전문의 추천)를 보면 된다. 보수적으로 넓게 잡은
-    1차 조치라 일부 과잉 제외가 있을 수 있다(예: 법률사무원처럼 실제로는 접근 가능할
-    수도 있는 직업까지 법률직 전체와 함께 빠짐) — 세분화는 후속 과제로 남긴다.
+    1차 조치라 일부 과잉 제외가 있었는데, ALLOWED_EXCEPTIONS로 그중 확인된 2건(법률
+    사무원·간호조무사)만 되돌렸다 — 202개 제외 대상 전체를 개별 심사한 건 아니라서
+    나머지 중에도 과잉 제외가 남아 있을 수 있다. 반대 방향(비제외 카테고리 안에 숨은
+    자격증 필요 직업)도 8건만 확인해서 requires_cert를 채웠고 전수 조사는 아니다 —
+    두 방향 모두 후속 과제로 남는다.
     """
     rows = db.execute(
         """
@@ -182,9 +197,12 @@ def _exclude_credential_gated_jobs(db) -> int:
     to_exclude = [
         r["id"]
         for r in rows
-        if r["cat1"] in EXCLUDED_CATEGORY_LEVELS["cat1"]
-        or r["cat2"] in EXCLUDED_CATEGORY_LEVELS["cat2"]
-        or r["name"] in EXCLUDED_JOB_NAMES
+        if r["name"] not in ALLOWED_EXCEPTIONS
+        and (
+            r["cat1"] in EXCLUDED_CATEGORY_LEVELS["cat1"]
+            or r["cat2"] in EXCLUDED_CATEGORY_LEVELS["cat2"]
+            or r["name"] in EXCLUDED_JOB_NAMES
+        )
     ]
     for job_id in to_exclude:
         db.execute("UPDATE jobs SET is_voice_recommendable = 0 WHERE id = ?", (job_id,))

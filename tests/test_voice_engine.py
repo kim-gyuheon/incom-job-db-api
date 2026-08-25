@@ -47,6 +47,21 @@ def test_credential_gated_categories_are_excluded(temp_job_db):
     assert rows.get("요양보호사 및 간병인") == 1
 
 
+def test_allowed_exceptions_survive_category_exclusion(temp_job_db):
+    """법률사무원/간호조무사는 cat1/cat2 통째 제외 대상이지만 ALLOWED_EXCEPTIONS라
+    살아있어야 한다 — 부팅마다 다시 도는 ensure_voice_engine_data()가 매번 이걸
+    지우고 다시 계산하므로, 여기서 깨지면 DB를 직접 고쳐도 다음 배포에서 원상복구된다."""
+    with db_module.get_db() as db:
+        voice_engine.ensure_voice_engine_data(db)
+        rows = {
+            r["name"]: r["is_voice_recommendable"]
+            for r in db.execute("SELECT name, is_voice_recommendable FROM jobs")
+        }
+
+    assert rows.get("법률사무원") == 1
+    assert rows.get("간호조무사") == 1
+
+
 def test_existing_recommendable_flag_and_jobs_endpoint_untouched(temp_job_db):
     """기존 is_recommendable(27개 파일럿)은 절대 건드리면 안 된다 — /api/jobs 회귀 방지."""
     with db_module.get_db() as db:
