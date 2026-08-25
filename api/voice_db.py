@@ -400,7 +400,13 @@ def all_tag_labels() -> Dict[str, str]:
 
 
 def recommendable_job_tags() -> List[Dict]:
-    """추천 대상 직업에 붙은 태그 전체. 스코어링 입력."""
+    """추천 대상 직업에 붙은 태그 전체(job_tags, REQUIRED/BONUS/EXCLUDE_IF_DIFFICULT).
+
+    2026-08-26: voice.py의 추천 채점이 이제 KNOW 82축 엔진(voice_engine.score_and_rank)을
+    쓰기 때문에 이 함수는 더 이상 호출되지 않는다. job_tags 테이블 자체(27개 직업 수작업
+    태그)는 그대로 남아 있으니, 나중에 이 정밀 태그를 다시 참고하고 싶으면 여기서 시작하면
+    된다 — 지워도 되는 죽은 코드는 아니고, "현재 안 쓰인다"는 뜻이다.
+    """
     with get_db() as db:
         rows = db.execute(
             """
