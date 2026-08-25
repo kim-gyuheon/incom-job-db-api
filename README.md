@@ -1,59 +1,21 @@
-# incom-job-db-api (KNOW 82축 엔진 이식판)
+# 희망직종 길잡이 API
 
-원본: [`kim-gyuheon/incom-job-db-api`](https://github.com/kim-gyuheon/incom-job-db-api) —
-백엔드팀이 구현·배포한 "희망직종 길잡이" API. 이 fork는 그 위에 `skillmatch-voice-backend`의
-KNOW 82축 매칭 엔진 + barrier 하드필터 + 538개 직무 전체 데이터를 이식한 버전이다.
+키오스크에서 음성으로 5개 질문에 답하면, 그 답변을 바탕으로 어울리는 직무를 추천해주는
+백엔드 API. FastAPI + SQLite 기반이며, 50~60대 이상 구직자가 상담원 도움을 받으며 공용
+단말에서 사용하는 상황을 기준으로 설계돼 있다.
 
-## 뭘 바꿨나
+## 무엇을 하는 서비스인가
 
-기존 구조(FastAPI 앱, 세션 관리, CORS, 에러 처리, LLM/규칙 기반 폴백 설계)는 **그대로
-유지**했다. 바뀐 건 추천 채점 로직과 STT 기본 공급자, D/E/F/C 태그 추출 방식이다 — 전부
-**요청당 과금이 발생하는 외부 API 의존을 없애는 방향**이다(실사용 붙으면 요청 수만큼
-비용이 커지는 구조라, 비용 정책상 결정함).
+1. 방문자마다 상담 세션을 하나 만든다.
+2. "하기 어려운 일이 있으신가요?" 등 고정된 5개 질문(C~G)에 마이크로 답하면, 음성을
+   텍스트로 바꾸고(STT) 답변에서 직무 관련 키워드(태그)를 추출해 저장한다.
+3. D/E/F(경험·희망·자신 있는 일) 답변으로 사용자 벡터를 만들고, 538개 국가직무 데이터와
+   코사인 유사도로 비교해 상위 5개를 추천한다. C(어려운 일)와 G(자격증 여부)는 추천에서
+   특정 직무를 제외하는 필터로 쓰인다.
+4. `/api/jobs`, `/api/categories`로 전체 직무 목록도 별도로 조회할 수 있다(추천과 무관하게
+   프런트가 카탈로그 화면에 쓰는 용도).
 
-| | 원본 | 이 fork |
-|---|---|---|
-| 추천 후보 직무 | 27개(수작업 태그 완료분) | **318개**(538개 크로스워크 완료, 자격 게이트 직군 220개 제외 — 아래 [자격 게이트 직군 제외](#자격-게이트-직군-제외-2026-08-26-추가) 참고) |
-| 채점 방식 | `job_tags`(REQUIRED/BONUS/EXCLUDE_IF_DIFFICULT, 태그 30개) | **KNOW 82축 코사인 유사도**(`engine/matching_engine.py`) |
-| C(하기 어려운 일) 제외 | `job_tags` role='EXCLUDE_IF_DIFFICULT' (27개 직무에만 데이터 있음) | **barrier 하드필터**(`data/barrier-review-combined.csv`, 538개 직무 전체, 제외 판정 1011건) |
-| D/E/F(경험/희망/자신) 태그 추출 | LLM 또는 `EXP_*`/`CAN_*` 표현 사전(19개 태그) | **규칙 기반 정규식**(`api/tagging.py`, 26개 태그, 부정어 처리 포함, LLM 불필요) |
-| G(자격증) | 그대로(Claude API 선택적 사용, 키 없으면 규칙 기반) | 그대로(엔진과 무관해서 안 건드림) |
-| STT 기본 공급자 | `openai`(Whisper API, 요청당 과금) | **`local`**(`faster-whisper`를 같은 프로세스에서 직접 실행, 과금 없음 — `api/stt.py`. `openai`/`mock`도 여전히 선택 가능) |
-| 세션 즉시 종료 | 없음(유휴 최대 120초까지 재사용 가능한 채로 남음) | **`DELETE /api/sessions/{sessionId}`**(신규 — 아래 [세션 즉시 종료](#세션-즉시-종료-2026-08-26-추가) 참고) |
-| 만료 세션 데이터 정리 | 없음(무기한 보관) | **`create_session()` 호출마다 유예 1시간 지난 만료 세션·전사문·추천 정리** |
-
-## 어떻게 이식했나
-
-1. `jobs.name`(job.db)과 KNOW 82축 CSV `직업명`이 538개 전부 1:1로 일치함을 먼저 확인
-   (같은 KECO/KNOW 국가직업분류 출처라 이름 크로스워크가 100% 신뢰 가능).
-2. `api/voice_engine.py`(신규) — 부팅마다(Render 무료 플랜은 배포마다 job.db가 초기화됨,
-   기존 `ensure_voice_schema()`와 같은 이유) `voice_job_axis_vectors`(직무별 82축 벡터),
-   `voice_job_barrier_excludes`(직무별 제외 barrier), `jobs.is_voice_recommendable` 세 개를
-   새로 채운다. **기존 `is_recommendable`/`/api/jobs`는 손대지 않았다** — 이미 배포돼 프론트가
-   쓰고 있는 파일럿 27개 목록은 그대로다.
-3. `api/voice.py`의 `_score_jobs()`를 걷어내고 `voice_engine.score_and_rank()` 호출로 교체.
-   C/D/E/F 태그 추출도 `api/tagging.py`(규칙 기반, LLM 불필요)로 교체했다. G만 원본 그대로.
-4. `engine/`, `api/tagging.py`, `api/vectorizing.py`, `data/`, `reports/`는
-   `skillmatch-voice-backend`에서 그대로 가져왔다(로직 수정 없음).
-
-## 자동 테스트
-
-```bash
-pip install -r requirements-dev.txt
-pytest tests/ -q
-```
-
-`tests/test_voice_engine.py` 7개: 크로스워크(벡터 538/538), 기존 `is_recommendable`(27개)
-불변, 부팅 재실행 멱등성, barrier 하드필터 실제 제외, 무신호 시 폴백, 태그 추출 카테고리
-분리, 자격 게이트 직군(의사·판사·연구원 등) 제외. 매번 커밋된 `job.db`를 임시 사본으로
-복사해서 실행하므로 원본 파일은 건드리지 않는다.
-
-`tests/test_stt.py` 6개: STT_PROVIDER 선택 로직(`local`은 키 불필요, `openai`는
-`OPENAI_API_KEY` 필요, 미설정 시 503), 빈 오디오는 모델 로딩 전에 걸러짐(불필요한 whisper
-모델 다운로드 방지), mock 공급자 응답. 실제 faster-whisper 전사 자체는 모델 다운로드가
-필요해서 여기서 테스트 안 함 — 로컬 실행이나 배포 후 실제 오디오로 확인할 것.
-
-## 로컬 실행(서버)
+## 빠른 시작
 
 ```bash
 cd api
@@ -61,118 +23,163 @@ pip install -r requirements.txt
 STT_PROVIDER=mock uvicorn main:app --reload
 ```
 
-빠른 흐름 확인은 `mock`으로. 실제 음성 인식까지 로컬에서 보려면 `STT_PROVIDER=local`로
-띄우면 된다(첫 요청 때 whisper 모델을 자동으로 받아온다 — 인터넷 필요, 몇 분 걸릴 수 있음).
-운영 배포 기본값도 `local`이다(과금 없음 — 위 표 참고).
+`STT_PROVIDER=mock`은 마이크 없이 질문별 고정 문장으로 전체 흐름을 빠르게 확인할 때 쓴다.
+실제 음성 인식까지 로컬에서 보려면 `STT_PROVIDER=local`로 띄우면 된다(첫 요청 때
+whisper 모델을 자동으로 받아온다 — 인터넷 필요, 몇 분 걸릴 수 있음). 서버가 뜨면
+`http://127.0.0.1:8000/docs`에서 API 문서를 바로 볼 수 있다.
 
-세션 생성 → C/D/E/F/G 답변 → 추천까지 전체 플로우를 mock STT로 직접 실행해서 확인:
-- 크로스워크(`voice_job_axis_vectors`) 538/538, 자격 게이트 필터 적용 후 추천 후보
-  (`is_voice_recommendable`) 318/538 (아래 [자격 게이트 직군 제외](#자격-게이트-직군-제외-2026-08-26-추가) 참고)
-- barrier 제외 판정 1011건 정상 반영(예: `night_shift` 태그가 28개 직무를 제외)
-- 추천 결과에 **기존 27개 밖의 직무**(행사기획자, 통계사무원, 사서 등 — 자격 게이트 필터
-  적용 후 기준)가 정상적으로 나옴 → 확장이 실제로 동작함을 확인
-- `/api/jobs?recommendableOnly=true` = 27, `/api/categories` = 10 — **기존 엔드포인트 응답
-  불변** 확인(회귀 없음)
-- `/openapi.json` 정상 생성
+## 폴더 구조
 
-## 자격 게이트 직군 제외 (2026-08-26 추가)
+```
+api/                음성 상담 + 직무 조회 API 본체
+  main.py            FastAPI 앱, CORS, 에러 핸들러, /api/jobs·/api/categories
+  voice.py            음성 상담 3개 엔드포인트(세션/답변/추천)
+  voice_db.py          세션·답변·추천 저장, 스키마 보정, 만료 정리
+  voice_engine.py       82축 코사인 유사도 매칭 + 자격 게이트 필터
+  voice_llm.py           G(자격증) 태그 추출, 추천 이유 문장 생성(Claude 선택적)
+  tagging.py               C/D/E/F 답변에서 태그를 뽑는 규칙 기반 정규식 추출기
+  vectorizing.py             태그 -> 82축 벡터 변환
+  stt.py                      음성 -> 텍스트 변환 (local/openai/mock)
+  db.py, models.py             SQLite 커넥션, /api/jobs 조회 SQL, pydantic 스키마
 
-538개 전체를 후보로 열었더니 실제로 문제가 생겼다 — "어르신 돌보고 간병하는 일을 했어요"
-(돌봄 경험) 답변에 대한 추천 top5 중 4개가 **안과의사/이비인후과의사 등 전문의**로
-나왔다(82축이 "의료 지식" 관련 축을 공유해서 코사인 유사도가 높게 나옴 — 실제로는 자격
-자체가 완전히 다른 직업인데도). 그래서 크로스워크는 538개 전부 되더라도, 자격증·시험·
-학위로 진입이 막혀서 이 키오스크 상담만으로 도달할 수 없는 직군은 `is_voice_recommendable`
-에서 다시 뺐다(`voice_engine._exclude_credential_gated_jobs`):
+engine/             538개 직무의 82축 벡터·barrier 데이터를 다루는 매칭 엔진
+  matching_engine.py  코사인 유사도 계산(축 개수와 무관하게 동작)
+  job_repository.py     CSV -> 직무 카탈로그 로딩, barrier 하드필터 적용
+  career_config.py, job_source.py   축 정의, CSV 파싱, barrier 판정 로직
 
-- cat2 전체 제외: 관리직(임원·부서장), 법률직, 경찰·소방·교도직, 군인, 교육직
-- cat1 전체 제외: 연구직 및 공학 기술직, 보건·의료직
-- 개별 제외: 항공기조종사·헬리콥터조종사·선장 및 항해사·철도전동차기관사·항공교통관제사·선박교통관제사,
-  노무사·회계사·세무사·관세사·감정평가사·행정사·손해사정사(국가자격시험 필요),
-  조세행정사무원·관세행정사무원·병무행정사무원·일반행정공무원·법원공무원(공무원 임용시험 필요) —
-  카테고리 필터를 다 적용한 뒤에도 "관세사"가 새어나오는 걸 실측으로 확인해서 개별로 추가함.
+data/               직무 82축 벡터(CSV), barrier 판정 데이터(CSV)
+reports/            태그 -> 82축 가중치, 태그 키워드 사전(JSON)
+job.db              SQLite 데이터베이스(직무·카테고리·세션 테이블)
+tests/              pytest 테스트(아래 "테스트" 참고)
+render.yaml         Render 배포 설정
+```
 
-결과: 538개 중 318개가 최종 추천 후보로 남는다. 돌봄 답변 재테스트 결과 의사는 더 이상
-안 나오지만(보험인수심사원/심리상담전문가/스포츠트레이너 등으로 바뀜), **보수적으로
-넓게 잡은 1차 조치라 완벽하지 않다** — 비슷한 성격의 새는 케이스가 더 있을 수 있고(개별
-제외 목록이 전수조사가 아니라 발견한 것만 추가하는 방식이라), 반대로 법률사무원처럼
-카테고리째 빠져서 과잉 제외됐을 수도 있는 직업도 있다. 세분화(cat3 단위 재검토, 개별
-직업 화이트/블랙리스트)는 후속 과제로 남긴다.
+## 동작 방식
 
-## 알려진 한계 (병합 전에 인지해야 할 것)
+### 1. 세션
 
-- **`easyName`/`description`/`requiresCert`/`certNote`는 기존 27개 직무만 실제 값이 채워져
-  있다.** 새로 추천 후보가 된 나머지 ~291개는 이 필드들이 비어 있거나(easyName/description
-  → null, 프론트 계약상 Optional이라 깨지진 않음) `requiresCert`가 부정확할 수 있다(538개
-  중 `requires_cert=1`은 4건뿐 — 사람이 27개만 채운 값). 의사·판사 등 명백한 자격 게이트
-  직군은 카테고리째 빠졌지만(위 항목 참고), 남은 318개 안에도 개별적으로 자격증이 필요한
-  직업(예: 이용사·미용사, 조리사 계열)이 있을 수 있는데 이런 세부 케이스는 `requiresCert`
-  실사 없이는 G(자격증 없음) 답변으로 안 걸러진다. 전체 318개에 대한
-  requires_cert/cert_note/easyName/description 실사가 후속 과제로 남는다.
-- `session_answers`/`question_options`(기존 구조화 답변 테이블)는 C/D/E/F 답변에 대해서는
-  더 이상 채워지지 않는다(태그 어휘가 바뀌어서). G만 기존대로 채워진다. **확인 결과 이
-  두 테이블은 `api/` 안 어디서도 다시 읽어가지 않는다**(쓰기 전용, grep으로 확인) — 지금
-  당장은 영향 없음. 나중에 admin 화면 등에서 이 테이블을 읽는 기능을 추가한다면 그때
-  다시 고려하면 된다.
-- 82축 코사인 유사도는 의미상 완벽히 들어맞지 않는 직무도 상위에 올라올 수 있다(예:
-  "사무실 자료 입력" 답변에 "상품중개인 및 경매사"가 나온 사례 확인, 자격 게이트 필터
-  적용 후에도 남음) — `skillmatch-voice-backend`에서도 동일하게 나타나는, 이 매칭 방식
-  자체의 특성이다. 가장 심각했던 사례(의사·판사·연구원급 오추천)는 위 카테고리 필터로
-  없앴지만, 이 정도의 "느슨한" 오매칭은 82축 방식을 쓰는 한 남아있을 걸로 예상한다.
+`POST /api/sessions`로 세션을 만들면 `sessionId`와 만료 정책(`idleTimeoutSeconds=120`,
+`maxTtlSeconds=1200`)을 받는다. 이후 두 엔드포인트는 이 `sessionId`를 경로에 넣어 호출한다.
+세션은 유휴 120초 또는 생성 후 1200초가 지나면 자동 만료되고, `DELETE /api/sessions/{id}`로
+언제든 즉시 종료할 수도 있다(존재하지 않거나 이미 끝난 세션에 호출해도 204를 반환하는
+멱등 삭제). 만료되거나 종료된 지 1시간이 지난 세션은 다음 `POST /api/sessions` 호출 때
+전사문·추천 데이터와 함께 자동으로 정리된다(무기한 보관하지 않음).
 
-## STT 로컬 전환 (2026-08-26 추가)
+### 2. 음성 답변 — `POST /api/sessions/{sessionId}/voice-answers`
 
-`api/stt.py`에 `STT_PROVIDER=local`(faster-whisper, 같은 프로세스에서 실행)을 추가하고
-운영 기본값으로 정했다 — 이유는 순수 비용 정책: 원본의 `openai`(Whisper API)는 요청당
-과금이라 실사용(어르신들이 키오스크에서 계속 말할 때마다) 붙으면 비용이 쌓인다. `local`은
-`skillmatch-voice-backend`의 `app/stt.py`와 동일 구성(모델 지연 로딩, Windows 임시파일
-PermissionError 회피 — Render/Linux에서도 안전)이고 요청당 과금이 없다.
+질문 5개는 고정돼 있다.
 
-`openai`/`mock` 옵션은 그대로 남겨뒀다 — `local`이 메모리 제약(Render 무료 플랜 512MB) 때문에
-안 되는 환경에서는 `openai`로 대체 가능. `ANTHROPIC_API_KEY`(G 태그 추출/추천 이유 생성
-보조용)도 같은 이유로 배포에 기본으로는 안 넣기로 함 — 없어도 규칙 기반으로 동작한다.
+| questionKey | 질문 | 추천에서의 역할 |
+| --- | --- | --- |
+| C | 하기 어려운 일이 있으신가요? | 해당 태그가 걸린 직무를 barrier로 제외 |
+| D | 예전에 어떤 일을 해보셨나요? | 긍정 신호(사용자 벡터에 더해짐) |
+| E | 앞으로 어떤 일을 하고 싶으신가요? | 긍정 신호 |
+| F | 어떤 일에 자신이 있으신가요? | 긍정 신호 |
+| G | 가지고 계신 자격증이 있으신가요? | "없음"이면 자격증 필요 직무 제외 |
 
-**주의**: `WHISPER_MODEL_SIZE=small`(int8) 기준 메모리 사용량이 Render 무료 플랜 512MB
-한도에 빠듯할 수 있다. 실제 배포해서 OOM이 나면 `WHISPER_MODEL_SIZE=base`나 `tiny`로
-낮추거나, `openai`로 되돌리거나, 유료 플랜을 검토해야 한다 — 이번 작업에서 Render에 직접
-띄워보고 메모리를 실측하진 않았다.
+오디오(base64 인코딩)를 보내면 STT로 전사한 뒤, C/D/E/F는 `tagging.py`의 규칙 기반
+정규식 추출기(부정어 처리 포함, LLM 불필요)로, G는 `voice_llm.py`(Claude API가 있으면
+사용, 없으면 표현 사전 기반 규칙 매칭)로 태그를 뽑아 저장한다. 말이 하나도 안 잡히면
+오류 대신 `status: "no_speech"`로 200을 돌려줘서 다시 말하게 유도한다. 같은 질문을 다시
+답하면 이전 답변은 비활성화되고 새 답변으로 대체된다(수정).
 
-## 세션 즉시 종료 + 만료 데이터 정리 (2026-08-26 추가)
+### 3. 추천 — `POST /api/sessions/{sessionId}/voice-recommendations`
 
-공용 키오스크에서 상담을 마치고 시작 화면으로 돌아가도 이전 사용자의 세션·전사문이
-재사용 가능한 채로 남을 수 있다는 문제를 발견해서 대응했다. 근본 원인은 프런트(React
-state 초기화 누락) 쪽에 있어서 그쪽 수정이 먼저지만, 백엔드에도 이를 뒷받침 못 하는
-구멍이 두 가지 있었다.
+D/E/F에서 뽑힌 태그를 82축(성격 16 + 지식중요도 33 + 지식수준 33) 벡터로 변환하고,
+538개 직무의 82축 벡터와 코사인 유사도를 계산해 상위 5개를 추천한다. 그 전에 두 단계
+필터를 거친다:
 
-1. **세션을 명시적으로 끝낼 방법이 없었다.** 유휴 타임아웃(최대 120초)이 지나야만
-   서버가 세션을 만료시켰다 — 프런트가 화면에서 상태를 지워도 서버는 그 sessionId를
-   최대 120초간 계속 유효한 걸로 취급했다. `DELETE /api/sessions/{sessionId}`를
-   새로 추가했다: 세션을 즉시 무효화(`sessions.ended_at` 설정)해서 그 뒤 어떤 요청도
-   410 `SESSION_EXPIRED`를 받는다. 존재하지 않거나 이미 끝난 세션에 호출해도 204를
-   반환한다(세션 존재 여부를 노출하지 않는 멱등 삭제 — 프런트가 "취소"나 "시작으로
-   돌아가기" 시점에 그냥 호출하면 된다). **v4 계약에 없던 추가 엔드포인트라 프런트가
-   아직 안 불러도 기존 흐름엔 영향 없다** — 이건 프런트 쪽 수정(App 레벨 reset 루틴)과
-   짝을 이뤄야 완성되는 대응이라, 프런트 팀에 이 엔드포인트 존재를 알려야 한다.
-2. **만료된 세션·전사문이 무기한 쌓였다.** `session_voice_answers`(실제 발화 전사문이
-   담긴 테이블)와 `session_recommendations`를 지우는 코드가 전혀 없었다 — Render
-   무료 플랜은 배포마다 `job.db`가 초기화돼서 실무상 영향은 제한적이지만, 같은 배포가
-   떠있는 동안에는 상담 내용이 계속 쌓이기만 했다. 별도 스케줄러 없이, `create_session()`
-   이 호출될 때마다(=새 상담 시작마다) 만료된 지 1시간(`RETENTION_GRACE_SECONDS`) 이상
-   지난 세션과 그 답변·추천을 지우는 정리 루틴을 추가했다. 1시간 유예를 두는 이유는
-   만료 직후 바로 지우면 정상적인 `SESSION_EXPIRED`(410) 오류 응답과 겹칠 수 있어서다.
+- **barrier 하드필터** — C에서 잡힌 태그(예: 야간근무 어려움)가 제외 대상으로 걸린
+  직무를 후보에서 뺀다(`data/barrier-review-combined.csv`, 538개 직무 전체에 대한
+  제외 판정 1011건).
+- **자격 게이트 필터** — 자격증·시험·학위가 있어야 하는 직군(의사, 판사, 연구원,
+  관리직 등)은 애초에 추천 후보(`is_voice_recommendable`)에서 빠져 있다. 순수
+  코사인 유사도만 쓰면 "돌봄 경험" 답변에 안과의사가 추천되는 식의 오추천이 실측으로
+  확인돼서 넣은 필터다(자세한 목록은 `api/voice_engine.py`의
+  `EXCLUDED_CATEGORY_LEVELS`/`EXCLUDED_JOB_NAMES` 참고). 538개 중 318개가 최종
+  후보로 남는다.
+- G에서 "자격증 없음"만 잡히면 `requires_cert=1`인 직무도 추가로 제외한다.
 
-`tests/test_sessions.py`(4개): 즉시 종료 후 `is_expired`가 True가 되는지, 종료가
-멱등인지(중복 호출·존재하지 않는 id 모두 안전), 유예 기간 안/밖 세션이 정확히 구분되는지,
-`create_session()` 호출이 실제로 정리를 트리거하는지 검증.
+긍정 신호 태그가 하나도 안 잡혔거나 필터링 후 후보가 하나도 안 남으면, 자격증 불필요한
+직무 우선으로 기본 추천(`isFallback: true`)을 돌려준다. D/E/F 중 최소 한 문항도 없으면
+`MISSING_ANSWERS`(400) 오류를 낸다.
 
-**남은 갭**: `sessionId`가 URL 경로에 들어가서 표준 웹서버 접근 로그(Render 쪽)에 남는
-건 이번에 손대지 않았다 — REST 경로 기반 세션 식별자의 일반적인 특성이고, 계약을 헤더
-기반 인증으로 바꾸는 건 이번 스코프를 크게 벗어난다. `sessionId`가 최대 1200초짜리
-단기값이고 Render 접근 로그는 팀 외부에 공개되지 않는다는 전제로 낮은 위험으로 판단해서
-보류했다 — 필요하면 별도로 다시 논의.
+### 4. 직무 목록 조회 — `GET /api/jobs`, `GET /api/categories`
 
-## 원본 대비 안 건드린 것
+추천과 무관하게 직무 카탈로그를 조회하는 엔드포인트. `categoryIds`로 대분류 필터링,
+`recommendableOnly=true`로 사람이 직접 검수한 27개 파일럿 직무만 볼 수 있다(추천
+엔드포인트가 쓰는 318개 후보군과는 다른, 별도로 관리되는 플래그다).
 
-`GET /api/jobs`, `GET /api/categories`, CORS 설정, 세션 만료 정책(유휴 120초/최대 1200초),
-에러 응답 포맷, `voice_llm.py`의 LLM/규칙 폴백 설계(G 태그 추출·추천 이유 생성) — 전부
-원본 그대로다. STT 공급자 추상화 자체(환경변수로 갈아끼우는 구조)도 원본 설계를 그대로
-따르되, `local` 옵션 하나를 추가하고 기본값만 바꿨다.
+### 음성 인식(STT)
+
+`STT_PROVIDER` 환경변수로 공급자를 고른다.
+
+| 값 | 동작 | 비용 |
+| --- | --- | --- |
+| `local` (기본값) | `faster-whisper`를 같은 프로세스에서 직접 실행 | 없음 |
+| `openai` | `OPENAI_API_KEY`로 Whisper API 호출 | 요청당 과금 |
+| `mock` | 질문별 고정 문장 반환 | 없음(테스트용) |
+| 미설정 | `STT_UNAVAILABLE`(503) 오류 | - |
+
+실사용(키오스크에서 계속 말할 때마다) 시 비용이 쌓이는 걸 피하려고 `local`을 기본값으로
+쓴다. `local`이 메모리 제약(예: Render 무료 플랜 512MB)으로 안 되는 환경에서는 `openai`로
+대체할 수 있다.
+
+## API 오류 형식
+
+모든 오류는 `{"detail": {"errorCode", "message", "questionKey", "missing"}}` 형태다.
+
+| HTTP | errorCode | 언제 |
+| --- | --- | --- |
+| 400 | `VALIDATION_ERROR` | 요청 본문 형식이 맞지 않음 |
+| 400 | `INVALID_QUESTION_KEY` | `questionKey`가 C/D/E/F/G가 아님 |
+| 400 | `INVALID_AUDIO` | `audio.data`가 base64로 해석되지 않거나 비어 있음 |
+| 400 | `UNSUPPORTED_AUDIO_ENCODING` | `audio.encoding`이 base64가 아님 |
+| 400 | `MISSING_ANSWERS` | 추천에 필요한 답변 부족 |
+| 404 | `SESSION_NOT_FOUND` | 세션 id가 없음 |
+| 410 | `SESSION_EXPIRED` | 유휴/최대 시간 초과 또는 명시적 종료 |
+| 413 | `AUDIO_TOO_LONG` / `AUDIO_TOO_LARGE` | 60초 / 10MB 초과 |
+| 415 | `UNSUPPORTED_AUDIO_FORMAT` | webm/ogg/mp4/m4a/mp3/wav 외 |
+| 502 | `STT_FAILED` | 음성 인식 실패 |
+| 503 | `STT_UNAVAILABLE` | STT 공급자 미설정 |
+
+## 환경변수
+
+`api/.env.example` 참고. 전부 선택사항이며, 안 넣으면 규칙 기반 폴백으로 동작한다.
+
+- `STT_PROVIDER` — `local`(권장) / `openai` / `mock`. 미설정 시 음성 답변이 503을 반환.
+- `WHISPER_MODEL_SIZE`, `WHISPER_DEVICE`, `WHISPER_COMPUTE_TYPE` — `STT_PROVIDER=local` 튜닝용(기본 `small`/`cpu`/`int8`).
+- `OPENAI_API_KEY`, `STT_MODEL` — `STT_PROVIDER=openai`일 때 필요.
+- `ANTHROPIC_API_KEY` — G(자격증) 태그 추출과 추천 이유 문장 생성에 보조로 사용. 없으면 규칙 기반으로 동작.
+
+## 테스트
+
+```bash
+pip install -r requirements-dev.txt
+pytest tests/ -q
+```
+
+- `tests/test_voice_engine.py` — 직무명 크로스워크(538/538), `/api/jobs`용 기존
+  `is_recommendable`(27개) 불변, 부팅 재실행 멱등성, barrier 하드필터 실제 제외, 무신호
+  시 폴백, 자격 게이트 필터가 의사·판사·연구원 등을 실제로 제외하는지.
+- `tests/test_sessions.py` — 세션 즉시 종료, 종료 멱등성, 만료 데이터 정리(유예 기간
+  경계, 대량 삭제 시에도 안전한지).
+- `tests/test_stt.py` — STT 공급자 선택 로직, 빈 오디오 처리, 동시 요청 시 모델이
+  한 번만 로드되는지(락 검증).
+
+전부 커밋된 `job.db`를 임시 사본으로 복사해서 실행하므로 원본 파일은 건드리지 않는다.
+
+## 알려진 한계
+
+- 새로 추천 후보가 된 직무 대부분은 `easyName`/`description`/`requiresCert`/`certNote`가
+  비어 있거나 부정확할 수 있다 — 27개 파일럿 직무만 사람이 값을 채웠다(538개 중
+  `requires_cert=1`은 4건뿐). G(자격증 없음) 답변으로 개별 직무의 자격증 요건을 거르는
+  기능이 새로 편입된 직무들엔 약하게 작동한다.
+- 자격 게이트 필터는 카테고리 단위로 보수적으로 잡은 1차 조치라, 실제로는 접근 가능한
+  직업이 과잉 제외됐거나 반대로 개별 자격증이 필요한 직업이 새어 들어왔을 수 있다.
+- 82축 코사인 유사도는 의미상 완벽히 들어맞지 않는 직무도 상위에 올라올 수 있다(축
+  방향이 겹치는 다른 분야 직무가 섞여 나오는 경우) — 이 매칭 방식 자체의 특성이다.
+- `WHISPER_MODEL_SIZE=small`(int8) 메모리 사용량이 Render 무료 플랜(512MB) 한도에
+  빠듯할 수 있다. OOM이 나면 `base`/`tiny`로 낮추거나 `openai`로 전환을 검토한다.
+- `sessionId`가 URL 경로에 있어서 표준 웹서버 접근 로그에 남는다 — 세션이 최대 1200초
+  짜리 단기값이라는 전제로 낮은 위험으로 보고 있다.
