@@ -105,6 +105,10 @@ _ADDED_COLUMNS = {
     "sessions": [
         ("last_activity_at", "DATETIME"),
         ("expires_at", "DATETIME"),
+        # 2026-08-26: 프런트 보안 리뷰(세션이 "시작으로 돌아가기" 후에도 재사용되는 문제)
+        # 대응 — 명시적으로 끝난 세션을 유휴/최대TTL 만료를 기다리지 않고 즉시 무효화하기
+        # 위한 컬럼. ended_at이 채워지면 is_expired()가 무조건 True를 반환한다.
+        ("ended_at", "DATETIME"),
     ],
     "session_recommendations": [
         ("reason_text", "TEXT"),
@@ -208,6 +212,11 @@ def create_session(device_hash: Optional[str] = None) -> Dict:
     expires_at = now + timedelta(seconds=MAX_TTL_SECONDS)
     session_id = str(uuid.uuid4())
     with get_db() as db:
+        # 새 세션을 만들 때마다 오래전에 만료된 세션(+답변·추천)을 정리한다. 백그라운드
+        # 스케줄러 없이도 "민감한 전사문을 무기한 보관하지 않는다"는 최소한의 보증을 준다
+        # (프런트 보안 리뷰의 retention 권고 대응). 만료 직후 세션을 바로 지우면 정상적인
+        # SESSION_EXPIRED(410) 오류 경로와 겹칠 수 있어서, 유예 기간을 두고 그 이후만 지운다.
+        _sweep_expired_sessions(db)
         db.execute(
             """
             INSERT INTO sessions (
@@ -233,13 +242,64 @@ def get_session(session_id: str) -> Optional[Dict]:
 
 
 def is_expired(session: Dict, now: Optional[datetime] = None) -> bool:
-    """유휴 시간 초과(마지막 활동 기준) 또는 최대 수명 초과면 만료."""
+    """유휴 시간 초과(마지막 활동 기준), 최대 수명 초과, 또는 명시적으로 끝난 세션이면 만료."""
+    if session.get("ended_at"):
+        return True
     now = now or utcnow()
     started = from_sql(session["started_at"])
     if now >= started + timedelta(seconds=MAX_TTL_SECONDS):
         return True
     last = session.get("last_activity_at") or session["started_at"]
     return now >= from_sql(last) + timedelta(seconds=IDLE_TIMEOUT_SECONDS)
+
+
+def end_session(session_id: str) -> None:
+    """세션을 즉시 무효화한다(유휴/최대TTL 만료를 기다리지 않음).
+
+    프런트가 "상담 취소" 또는 "시작 화면으로 돌아가기" 시점에 호출해서, 같은 sessionId가
+    유휴 타임아웃(최대 120초)이 끝나기 전까지 재사용 가능한 채로 남아있는 창을 없앤다
+    (보안 리뷰 Finding — 세션이 다음 사용자에게 그대로 넘어가는 문제의 백엔드 측 대응).
+    이미 없거나 이미 끝난 세션에 대해 호출해도 안전하다(멱등).
+    """
+    with get_db() as db:
+        db.execute(
+            "UPDATE sessions SET ended_at = ? WHERE id = ? AND ended_at IS NULL",
+            (to_sql(utcnow()), session_id),
+        )
+
+
+# 만료 후 이 시간(초)이 더 지나야 실제로 지운다 — 그 사이엔 클라이언트가 SESSION_EXPIRED
+# 응답을 정상적으로 받을 수 있어야 하므로, 만료 즉시 삭제하지 않는다.
+RETENTION_GRACE_SECONDS = 3600
+
+
+_STALE_SESSION_IDS_SQL = """
+    SELECT id FROM sessions
+     WHERE (ended_at IS NOT NULL AND ended_at < ?)
+        OR (expires_at IS NOT NULL AND expires_at < ?)
+"""
+
+
+def _sweep_expired_sessions(db) -> int:
+    """만료(또는 명시적 종료)된 지 RETENTION_GRACE_SECONDS 이상 지난 세션과 그 답변·추천을
+    지운다. FK cascade 여부가 불확실해서 자식 테이블부터 명시적으로 지운다.
+
+    2026-08-26 QA 수정(Claude Code): 처음엔 대상 id를 파이썬으로 모아서
+    `WHERE id IN (?,?,?...)`로 지웠는데, 쌓인 만료 세션이 SQLite 바인드 파라미터 상한
+    (많은 빌드에서 999개)을 넘으면 "too many SQL variables"로 예외가 나고, 이게
+    create_session() 안에서 통째로 터져서 세션 생성 자체가 막힌다 — 정리 루틴 하나 때문에
+    전체 서비스가 멈추는 셈. 그래서 id를 파이썬으로 들고 다니지 않고 서브쿼리로 바로
+    지운다 — 몇 개가 지워지든 바인드 파라미터는 쿼리당 2개(컷오프 두 번)로 고정된다.
+    """
+    cutoff = to_sql(utcnow() - timedelta(seconds=RETENTION_GRACE_SECONDS))
+    params = (cutoff, cutoff)
+
+    for table in ("session_recommendations", "session_answers", "session_voice_answers"):
+        db.execute(
+            f"DELETE FROM {table} WHERE session_id IN ({_STALE_SESSION_IDS_SQL})", params
+        )
+    cursor = db.execute(f"DELETE FROM sessions WHERE id IN ({_STALE_SESSION_IDS_SQL})", params)
+    return cursor.rowcount if cursor.rowcount is not None and cursor.rowcount >= 0 else 0
 
 
 def touch_session(session_id: str, last_step: Optional[str] = None) -> None:
