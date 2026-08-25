@@ -2,8 +2,12 @@ fastapi
 uvicorn[standard]
 anthropic
 pydantic
-# stt.py가 Whisper 전사 API를 직접 호출한다 (anthropic이 끌어오지만 명시해 둔다)
+# stt.py의 STT_PROVIDER=openai 대안 경로가 Whisper 전사 API를 직접 호출한다
+# (anthropic이 끌어오지만 명시해 둔다)
 httpx
+# stt.py의 STT_PROVIDER=local(기본 운영 방식) — faster-whisper로 같은 프로세스 안에서
+# 전사한다. 요청당 과금이 없어서 openai보다 이쪽을 기본으로 쓰기로 함(비용 정책).
+faster-whisper
 # voice_engine.py: skillmatch-voice-backend의 82축 코사인 유사도 엔진 (engine/, tagging.py,
 # vectorizing.py). numpy는 매칭 계산, pandas는 부팅 시 82축/barrier CSV 적재에 쓴다.
 numpy

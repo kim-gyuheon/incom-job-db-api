@@ -6,8 +6,10 @@ KNOW 82축 매칭 엔진 + barrier 하드필터 + 538개 직무 전체 데이터
 
 ## 뭘 바꿨나
 
-기존 구조(FastAPI 앱, 세션 관리, STT 추상화, CORS, 에러 처리, LLM/규칙 기반 폴백 설계)는
-**그대로 유지**했다. 바뀐 건 음성 답변 3개 엔드포인트 중 **채점 로직 하나**뿐이다.
+기존 구조(FastAPI 앱, 세션 관리, CORS, 에러 처리, LLM/규칙 기반 폴백 설계)는 **그대로
+유지**했다. 바뀐 건 추천 채점 로직과 STT 기본 공급자, D/E/F/C 태그 추출 방식이다 — 전부
+**요청당 과금이 발생하는 외부 API 의존을 없애는 방향**이다(실사용 붙으면 요청 수만큼
+비용이 커지는 구조라, 비용 정책상 결정함).
 
 | | 원본 | 이 fork |
 |---|---|---|
@@ -15,7 +17,8 @@ KNOW 82축 매칭 엔진 + barrier 하드필터 + 538개 직무 전체 데이터
 | 채점 방식 | `job_tags`(REQUIRED/BONUS/EXCLUDE_IF_DIFFICULT, 태그 30개) | **KNOW 82축 코사인 유사도**(`engine/matching_engine.py`) |
 | C(하기 어려운 일) 제외 | `job_tags` role='EXCLUDE_IF_DIFFICULT' (27개 직무에만 데이터 있음) | **barrier 하드필터**(`data/barrier-review-combined.csv`, 538개 직무 전체, 제외 판정 1011건) |
 | D/E/F(경험/희망/자신) 태그 추출 | LLM 또는 `EXP_*`/`CAN_*` 표현 사전(19개 태그) | **규칙 기반 정규식**(`api/tagging.py`, 26개 태그, 부정어 처리 포함, LLM 불필요) |
-| G(자격증) | 그대로 | 그대로(엔진과 무관해서 안 건드림) |
+| G(자격증) | 그대로(Claude API 선택적 사용, 키 없으면 규칙 기반) | 그대로(엔진과 무관해서 안 건드림) |
+| STT 기본 공급자 | `openai`(Whisper API, 요청당 과금) | **`local`**(`faster-whisper`를 같은 프로세스에서 직접 실행, 과금 없음 — `api/stt.py`. `openai`/`mock`도 여전히 선택 가능) |
 
 ## 어떻게 이식했나
 
@@ -43,6 +46,11 @@ pytest tests/ -q
 분리, 자격 게이트 직군(의사·판사·연구원 등) 제외. 매번 커밋된 `job.db`를 임시 사본으로
 복사해서 실행하므로 원본 파일은 건드리지 않는다.
 
+`tests/test_stt.py` 6개: STT_PROVIDER 선택 로직(`local`은 키 불필요, `openai`는
+`OPENAI_API_KEY` 필요, 미설정 시 503), 빈 오디오는 모델 로딩 전에 걸러짐(불필요한 whisper
+모델 다운로드 방지), mock 공급자 응답. 실제 faster-whisper 전사 자체는 모델 다운로드가
+필요해서 여기서 테스트 안 함 — 로컬 실행이나 배포 후 실제 오디오로 확인할 것.
+
 ## 로컬 실행(서버)
 
 ```bash
@@ -50,6 +58,10 @@ cd api
 pip install -r requirements.txt
 STT_PROVIDER=mock uvicorn main:app --reload
 ```
+
+빠른 흐름 확인은 `mock`으로. 실제 음성 인식까지 로컬에서 보려면 `STT_PROVIDER=local`로
+띄우면 된다(첫 요청 때 whisper 모델을 자동으로 받아온다 — 인터넷 필요, 몇 분 걸릴 수 있음).
+운영 배포 기본값도 `local`이다(과금 없음 — 위 표 참고).
 
 세션 생성 → C/D/E/F/G 답변 → 추천까지 전체 플로우를 mock STT로 직접 실행해서 확인:
 - 크로스워크(`voice_job_axis_vectors`) 538/538, 자격 게이트 필터 적용 후 추천 후보
@@ -105,8 +117,26 @@ STT_PROVIDER=mock uvicorn main:app --reload
   자체의 특성이다. 가장 심각했던 사례(의사·판사·연구원급 오추천)는 위 카테고리 필터로
   없앴지만, 이 정도의 "느슨한" 오매칭은 82축 방식을 쓰는 한 남아있을 걸로 예상한다.
 
+## STT 로컬 전환 (2026-08-26 추가)
+
+`api/stt.py`에 `STT_PROVIDER=local`(faster-whisper, 같은 프로세스에서 실행)을 추가하고
+운영 기본값으로 정했다 — 이유는 순수 비용 정책: 원본의 `openai`(Whisper API)는 요청당
+과금이라 실사용(어르신들이 키오스크에서 계속 말할 때마다) 붙으면 비용이 쌓인다. `local`은
+`skillmatch-voice-backend`의 `app/stt.py`와 동일 구성(모델 지연 로딩, Windows 임시파일
+PermissionError 회피 — Render/Linux에서도 안전)이고 요청당 과금이 없다.
+
+`openai`/`mock` 옵션은 그대로 남겨뒀다 — `local`이 메모리 제약(Render 무료 플랜 512MB) 때문에
+안 되는 환경에서는 `openai`로 대체 가능. `ANTHROPIC_API_KEY`(G 태그 추출/추천 이유 생성
+보조용)도 같은 이유로 배포에 기본으로는 안 넣기로 함 — 없어도 규칙 기반으로 동작한다.
+
+**주의**: `WHISPER_MODEL_SIZE=small`(int8) 기준 메모리 사용량이 Render 무료 플랜 512MB
+한도에 빠듯할 수 있다. 실제 배포해서 OOM이 나면 `WHISPER_MODEL_SIZE=base`나 `tiny`로
+낮추거나, `openai`로 되돌리거나, 유료 플랜을 검토해야 한다 — 이번 작업에서 Render에 직접
+띄워보고 메모리를 실측하진 않았다.
+
 ## 원본 대비 안 건드린 것
 
 `GET /api/jobs`, `GET /api/categories`, CORS 설정, 세션 만료 정책(유휴 120초/최대 1200초),
-STT 공급자 추상화(mock/openai), 에러 응답 포맷, `voice_llm.py`의 LLM/규칙 폴백 설계 —
-전부 원본 그대로다.
+에러 응답 포맷, `voice_llm.py`의 LLM/규칙 폴백 설계(G 태그 추출·추천 이유 생성) — 전부
+원본 그대로다. STT 공급자 추상화 자체(환경변수로 갈아끼우는 구조)도 원본 설계를 그대로
+따르되, `local` 옵션 하나를 추가하고 기본값만 바꿨다.
