@@ -19,6 +19,7 @@ Claude(Anthropic) API는 오디오 입력을 받지 않으므로 STT는 별도 �
 import math
 import os
 import tempfile
+import threading
 from typing import Dict, Optional
 
 import httpx
@@ -89,6 +90,13 @@ def transcribe(audio_bytes: bytes, audio_format: str, question_key: str) -> Dict
 
 
 _local_transcriber = None
+# FastAPI는 sync 경로 함수(submit_voice_answer)를 스레드풀에서 돌린다 — 즉 동시에 들어온
+# 요청 두 개가 서로 다른 스레드에서 _transcribe_local을 동시에 호출할 수 있다.
+# `if _local_transcriber is None: ... 로드 ...`는 확인과 대입 사이에 창이 있어서, 둘 다
+# None을 보고 동시에 WhisperModel(...)을 두 번 로드할 수 있다(메모리 두 배로 쓰고, Render
+# 무료 플랜 메모리 한도에서 그대로 OOM 위험). 락으로 로딩만 직렬화한다(전사 자체는 잠그지
+# 않음 — 여러 키오스크가 붙을 가능성을 생각해 처리량을 불필요하게 죽이지 않기 위해).
+_local_transcriber_lock = threading.Lock()
 
 
 def _transcribe_local(audio_bytes: bytes) -> Dict:
@@ -101,17 +109,19 @@ def _transcribe_local(audio_bytes: bytes) -> Dict:
     if not audio_bytes:
         raise SttError("INVALID_AUDIO", "오디오 데이터가 비어 있습니다.", status_code=400)
     if _local_transcriber is None:
-        try:
-            from faster_whisper import WhisperModel
-        except Exception as exc:  # pragma: no cover - dependency boundary
-            raise SttError(
-                "STT_UNAVAILABLE",
-                "faster-whisper를 불러오지 못했습니다: %s" % exc,
-                status_code=503,
-            )
-        _local_transcriber = WhisperModel(
-            _WHISPER_MODEL_SIZE, device=_WHISPER_DEVICE, compute_type=_WHISPER_COMPUTE_TYPE
-        )
+        with _local_transcriber_lock:
+            if _local_transcriber is None:  # 락 기다리는 동안 다른 스레드가 이미 로드했을 수 있음
+                try:
+                    from faster_whisper import WhisperModel
+                except Exception as exc:  # pragma: no cover - dependency boundary
+                    raise SttError(
+                        "STT_UNAVAILABLE",
+                        "faster-whisper를 불러오지 못했습니다: %s" % exc,
+                        status_code=503,
+                    )
+                _local_transcriber = WhisperModel(
+                    _WHISPER_MODEL_SIZE, device=_WHISPER_DEVICE, compute_type=_WHISPER_COMPUTE_TYPE
+                )
 
     # NamedTemporaryFile(delete=True)는 파일을 연 채로 유지해서, model.transcribe()가
     # 내부적으로 PyAV/ffmpeg로 같은 경로를 다시 열려고 하면 Windows에서 PermissionError가

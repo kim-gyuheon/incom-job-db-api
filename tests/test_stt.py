@@ -6,6 +6,11 @@ CI/로컬에서 무겁고 느림) — dispatch 로직과 입력 검증만 확인
 
 from __future__ import annotations
 
+import sys
+import threading
+import time
+import types
+
 import stt
 
 
@@ -57,3 +62,48 @@ def test_mock_provider_returns_question_specific_text(monkeypatch):
     result = stt.transcribe(b"ignored", "webm", "G")
     assert result["text"] == stt._MOCK_TEXT["G"]
     assert result["confidence"] == 0.99
+
+
+def test_local_transcriber_loads_only_once_under_concurrent_requests(monkeypatch):
+    """회귀 테스트: 락 없이 `if _local_transcriber is None: ... 로드 ...`만 있으면, 동시에
+    들어온 요청 두 개가 둘 다 None을 보고 WhisperModel을 두 번 로드할 수 있었다(메모리
+    두 배 사용 -> Render 무료 플랜에서 OOM 위험). FastAPI가 sync 경로 함수를 스레드풀에서
+    돌리므로 이런 동시 호출이 실제로 일어날 수 있다."""
+    construct_count = 0
+    construct_lock = threading.Lock()
+
+    class FakeInfo:
+        language_probability = 1.0
+
+    class FakeWhisperModel:
+        def __init__(self, *args, **kwargs):
+            nonlocal construct_count
+            # 두 스레드가 동시에 "아직 없다"고 판단할 여유를 주기 위해 로딩을 살짝 늦춘다.
+            time.sleep(0.05)
+            with construct_lock:
+                construct_count += 1
+
+        def transcribe(self, path, language="ko"):
+            return [], FakeInfo()
+
+    fake_module = types.ModuleType("faster_whisper")
+    fake_module.WhisperModel = FakeWhisperModel
+    monkeypatch.setitem(sys.modules, "faster_whisper", fake_module)
+    monkeypatch.setattr(stt, "_local_transcriber", None)
+
+    errors = []
+
+    def worker():
+        try:
+            stt._transcribe_local(b"fake-audio-bytes")
+        except Exception as exc:  # pragma: no cover - 실패하면 아래 assert가 알려줌
+            errors.append(exc)
+
+    threads = [threading.Thread(target=worker) for _ in range(8)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join(timeout=5)
+
+    assert not errors, f"worker 스레드에서 예외 발생: {errors}"
+    assert construct_count == 1, f"WhisperModel이 {construct_count}번 로드됨(1번이어야 함)"
