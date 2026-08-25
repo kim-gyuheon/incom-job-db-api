@@ -2,3 +2,5 @@ fastapi
 uvicorn[standard]
 anthropic
 pydantic
+# stt.py가 Whisper 전사 API를 직접 호출한다 (anthropic이 끌어오지만 명시해 둔다)
+httpx
