@@ -20,11 +20,20 @@ if str(API_DIR) not in sys.path:
 
 @pytest.fixture()
 def temp_job_db(tmp_path, monkeypatch):
-    """커밋된 job.db를 임시 경로로 복사하고, db.DB_PATH가 그쪽을 보게 한다."""
+    """커밋된 job.db를 임시 경로로 복사하고, db.DB_PATH가 그쪽을 보게 한다.
+
+    실제 부팅 때(main.py의 lifespan)와 마찬가지로 ensure_voice_schema()를 먼저 돌려서
+    sessions.ended_at 같은 마이그레이션 컬럼과 voice_questions 시드가 준비된 상태로
+    테스트를 시작한다 — 그래야 세션 관련 테스트가 실제 운영과 같은 스키마를 본다.
+    """
     import db as db_module
 
     src = REPO_ROOT / "job.db"
     dst = tmp_path / "job.db"
     shutil.copy(src, dst)
     monkeypatch.setattr(db_module, "DB_PATH", dst)
+
+    import voice_db
+
+    voice_db.ensure_voice_schema()
     return dst

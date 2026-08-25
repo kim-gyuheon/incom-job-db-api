@@ -12,7 +12,7 @@ import base64
 import binascii
 from typing import Dict, List, Optional
 
-from fastapi import APIRouter, HTTPException, Path
+from fastapi import APIRouter, HTTPException, Path, Response
 
 import stt
 import voice_db as store
@@ -120,6 +120,24 @@ def create_session(body: Optional[SessionCreateRequest] = None):
         idleTimeoutSeconds=store.IDLE_TIMEOUT_SECONDS,
         maxTtlSeconds=store.MAX_TTL_SECONDS,
     )
+
+
+@router.delete(
+    "/sessions/{sessionId}",
+    status_code=204,
+    summary="상담 세션 즉시 종료",
+    description=(
+        "프런트엔드 보안 리뷰 대응(2026-08-26) — 상담을 취소하거나 시작 화면으로 돌아갈 때"
+        " 호출한다. 유휴 타임아웃(최대 120초)이 끝나기 전까지 같은 sessionId가 재사용"
+        " 가능한 채로 남는 창을 없애서, 같은 단말의 다음 사용자가 이전 세션을 이어받지"
+        " 못하게 한다. 원래 v4 계약에는 없던 추가 엔드포인트라 프런트가 아직 호출하지"
+        " 않아도 기존 흐름에 영향 없음. 이미 없거나 이미 끝난 세션도 204를 반환한다"
+        "(세션 존재 여부를 노출하지 않는 멱등 삭제)."
+    ),
+)
+def delete_session(sessionId: str = Path(..., description="종료할 세션 id")):
+    store.end_session(sessionId)
+    return Response(status_code=204)
 
 
 # --- POST /api/sessions/{sessionId}/voice-answers --------------------------
