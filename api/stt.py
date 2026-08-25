@@ -32,7 +32,12 @@ MAX_DURATION_MS = 60_000
 _OPENAI_URL = "https://api.openai.com/v1/audio/transcriptions"
 _OPENAI_MODEL = os.environ.get("STT_MODEL", "whisper-1")
 
-_WHISPER_MODEL_SIZE = os.environ.get("WHISPER_MODEL_SIZE", "small")
+# 2026-08-26: small(int8) 실측 결과 ct2 가중치 파일이 462MB(fp16, 로드 시 int8로
+# 양자화되어 절반가량인 ~230MB로 줄지만)라 Render 무료 플랜(512MB) 안에서 FastAPI/
+# uvicorn/sqlite 기본 오버헤드까지 더하면 여유가 거의 없다. base는 139MB(fp16, int8
+# 로드 시 ~70MB)로 훨씬 안전해서 기본값을 base로 낮춘다 — 대회 당일 데모 중 OOM으로
+# 죽는 것보다 인식 정확도를 조금 낮추는 쪽이 낫다는 판단.
+_WHISPER_MODEL_SIZE = os.environ.get("WHISPER_MODEL_SIZE", "base")
 _WHISPER_DEVICE = os.environ.get("WHISPER_DEVICE", "cpu")
 _WHISPER_COMPUTE_TYPE = os.environ.get("WHISPER_COMPUTE_TYPE", "int8")
 
