@@ -31,7 +31,18 @@ KNOW 82축 매칭 엔진 + barrier 하드필터 + 538개 직무 전체 데이터
 4. `engine/`, `api/tagging.py`, `api/vectorizing.py`, `data/`, `reports/`는
    `skillmatch-voice-backend`에서 그대로 가져왔다(로직 수정 없음).
 
-## 로컬 검증
+## 자동 테스트
+
+```bash
+pip install -r requirements-dev.txt
+pytest tests/ -q
+```
+
+`tests/test_voice_engine.py` 6개: 크로스워크 538/538, 기존 `is_recommendable`(27개) 불변,
+부팅 재실행 멱등성, barrier 하드필터 실제 제외, 무신호 시 폴백, 태그 추출 카테고리 분리.
+매번 커밋된 `job.db`를 임시 사본으로 복사해서 실행하므로 원본 파일은 건드리지 않는다.
+
+## 로컬 실행(서버)
 
 ```bash
 cd api
@@ -57,8 +68,10 @@ STT_PROVIDER=mock uvicorn main:app --reload
   511개 직무에는 사실상 적용되지 않는다** — 실제 자격증이 필요한 직업이 추천될 수 있다.
   전체 538개에 대한 requires_cert/cert_note/easyName/description 실사가 후속 과제로 남는다.
 - `session_answers`/`question_options`(기존 구조화 답변 테이블)는 C/D/E/F 답변에 대해서는
-  더 이상 채워지지 않는다(태그 어휘가 바뀌어서). G만 기존대로 채워진다. 이 테이블을 쓰는
-  다른 기능이 있다면 별도 확인이 필요하다.
+  더 이상 채워지지 않는다(태그 어휘가 바뀌어서). G만 기존대로 채워진다. **확인 결과 이
+  두 테이블은 `api/` 안 어디서도 다시 읽어가지 않는다**(쓰기 전용, grep으로 확인) — 지금
+  당장은 영향 없음. 나중에 admin 화면 등에서 이 테이블을 읽는 기능을 추가한다면 그때
+  다시 고려하면 된다.
 - 82축 코사인 유사도는 의미상 완벽히 들어맞지 않는 직무도 상위에 올라올 수 있다(예:
   "사무실 자료 입력" 답변에 "웹기획자"가 나온 사례 확인) — `skillmatch-voice-backend`에서도
   동일하게 나타나는, 이 매칭 방식 자체의 특성이다.
