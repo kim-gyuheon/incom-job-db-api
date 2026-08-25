@@ -1,17 +1,31 @@
+from contextlib import asynccontextmanager
 from typing import List, Optional
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.utils import get_openapi
+from fastapi.responses import JSONResponse
 
-from db import get_db
+from db import JOBS_SQL, get_db
 from models import (
     CategoryItem,
     CategoryListResponse,
     JobItem,
     JobListResponse,
 )
+from voice import router as voice_router
+from voice_db import ensure_voice_schema
 
-app = FastAPI(title="희망직종 길잡이 API")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Render 무료 플랜은 배포마다 job.db가 새로 펼쳐지므로 매 부팅 때 스키마를 보정한다."""
+    ensure_voice_schema()
+    yield
+
+
+app = FastAPI(title="희망직종 길잡이 API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,26 +40,79 @@ app.add_middleware(
 )
 
 
-# job_categories는 3단계 계층(level 1 대분류 → 2 중분류 → 3 소분류)이고
-# jobs.category_id는 항상 level 3을 가리킨다. 따라서 대분류까지 두 번 거슬러 올라간다.
-_JOBS_SQL = """
-    SELECT
-        j.id                AS id,
-        j.name              AS name,
-        j.easy_name         AS easyName,
-        j.one_line_desc     AS description,
-        c1.id               AS categoryId,
-        c1.name             AS categoryName,
-        c2.name             AS subCategoryName,
-        c3.name             AS detailCategoryName,
-        j.requires_cert     AS requiresCert,
-        j.cert_note         AS certNote,
-        j.is_recommendable  AS isRecommendable
-    FROM jobs j
-    JOIN job_categories c3 ON c3.id = j.category_id
-    JOIN job_categories c2 ON c2.id = c3.parent_id
-    JOIN job_categories c1 ON c1.id = c2.parent_id
-"""
+# 음성 상담 엔드포인트 3개 (POST /api/sessions, .../voice-answers, .../voice-recommendations)
+app.include_router(voice_router)
+
+
+def custom_openapi():
+    """FastAPI가 자동으로 넣는 422를 스펙에서 뺀다.
+
+    요청 검증 실패는 위 핸들러가 400 VALIDATION_ERROR로 바꿔 내보내므로,
+    422가 남아 있으면 프론트가 없는 응답을 처리하게 된다.
+    """
+    if app.openapi_schema:
+        return app.openapi_schema
+    schema = get_openapi(
+        title=app.title,
+        version=app.version,
+        routes=app.routes,
+    )
+    for path in schema.get("paths", {}).values():
+        for operation in path.values():
+            responses = operation.get("responses", {})
+            if responses.pop("422", None) is None:
+                continue
+            responses.setdefault(
+                "400",
+                {
+                    "description": "요청 오류",
+                    "content": {
+                        "application/json": {
+                            "schema": {"$ref": "#/components/schemas/ApiErrorResponse"}
+                        }
+                    },
+                },
+            )
+    app.openapi_schema = schema
+    return schema
+
+
+app.openapi = custom_openapi
+
+
+@app.exception_handler(RequestValidationError)
+def _validation_error_handler(request: Request, exc: RequestValidationError):
+    """요청 본문 검증 실패도 계약과 같은 detail 형태로 내보낸다."""
+    first = exc.errors()[0] if exc.errors() else {}
+    location = ".".join(str(part) for part in first.get("loc", ())[1:])
+    return JSONResponse(
+        status_code=400,
+        content={
+            "detail": {
+                "errorCode": "VALIDATION_ERROR",
+                "message": "요청 형식이 올바르지 않습니다: %s (%s)"
+                % (location or "body", first.get("msg", "검증 실패")),
+                "questionKey": None,
+                "missing": None,
+            }
+        },
+    )
+
+
+@app.exception_handler(HTTPException)
+def _http_exception_handler(request: Request, exc: HTTPException):
+    """detail이 문자열인 기본 오류(404 등)도 같은 형태로 감싼다."""
+    if isinstance(exc.detail, dict):
+        detail = exc.detail
+    else:
+        detail = {
+            "errorCode": "HTTP_%d" % exc.status_code,
+            "message": str(exc.detail),
+            "questionKey": None,
+            "missing": None,
+        }
+    return JSONResponse(status_code=exc.status_code, content={"detail": detail},
+                        headers=getattr(exc, "headers", None))
 
 
 @app.get("/api/jobs", response_model=JobListResponse)
@@ -75,7 +142,7 @@ def list_jobs(
     where = (" WHERE " + " AND ".join(conditions)) if conditions else ""
 
     with get_db() as db:
-        rows = db.execute(_JOBS_SQL + where + " ORDER BY c1.id, j.id", params).fetchall()
+        rows = db.execute(JOBS_SQL + where + " ORDER BY c1.id, j.id", params).fetchall()
 
     items = [JobItem(**dict(r)) for r in rows]
     return JobListResponse(total=len(items), items=items)
@@ -114,6 +181,9 @@ def root():
             "GET /api/jobs?categoryIds=1,2": "대분류 id로 필터",
             "GET /api/categories": "대분류 목록",
             "GET /api/health": "상태 확인",
+            "POST /api/sessions": "음성 상담 세션 생성",
+            "POST /api/sessions/{sessionId}/voice-answers": "음성 답변 업로드(STT)",
+            "POST /api/sessions/{sessionId}/voice-recommendations": "음성 답변 기반 직무 추천",
         },
     }
 

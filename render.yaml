@@ -12,3 +12,14 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.11.9"
+      # 아래 세 개는 값을 저장소에 두지 않고 Render 대시보드에서 직접 입력한다.
+      # STT_PROVIDER    : 음성 -> 텍스트 공급자. openai | mock
+      #                   (mock은 고정 문장 반환. 마이크·과금 없이 흐름만 볼 때)
+      # OPENAI_API_KEY  : STT_PROVIDER=openai일 때 필요
+      # ANTHROPIC_API_KEY: 키워드 추출/추천 이유 생성. 없으면 규칙 기반으로 동작한다.
+      - key: STT_PROVIDER
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
