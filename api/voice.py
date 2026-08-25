@@ -16,6 +16,7 @@ from fastapi import APIRouter, HTTPException, Path
 
 import stt
 import voice_db as store
+import voice_engine
 import voice_llm
 from models import (
     ApiErrorResponse,
@@ -25,6 +26,7 @@ from models import (
     VoiceAnswerResponse,
     VoiceRecommendationResponse,
 )
+from tagging import tag_definition_by_id
 
 router = APIRouter(prefix="/api", tags=["음성 상담"])
 
@@ -218,9 +220,18 @@ def submit_voice_answer(
         )
 
     question_id = question["question_id"]
-    keywords = voice_llm.extract_tag_codes(
-        stt_text, store.tags_by_category(question["tag_category"])
-    )
+    if question_key == "G":
+        # 자격증 보유 여부는 82축 엔진과 무관해서 기존 CERT_있음/CERT_없음 방식을 그대로 쓴다.
+        keywords = voice_llm.extract_tag_codes(
+            stt_text, store.tags_by_category(question["tag_category"])
+        )
+    else:
+        # C/D/E/F는 skillmatch-voice-backend의 규칙 기반 추출기를 쓴다(LLM 불필요, 부정어
+        # 처리 포함). C(하기 어려운 일)는 barrier 태그만, D/E/F(경험/희망/자신)는 긍정 신호
+        # 태그(experience/condition)만 취한다 — voice_engine.extract_positive_and_barrier.
+        positive, barrier = voice_engine.extract_positive_and_barrier(stt_text)
+        wanted = barrier if question_key == "C" else positive
+        keywords = [m.tag_id for m in wanted]
     matched = set(keywords)
     option_ids = [
         o["id"] for o in store.options_for_question(question_id) if o["tag_code"] in matched
@@ -257,39 +268,24 @@ def submit_voice_answer(
 # --- POST /api/sessions/{sessionId}/voice-recommendations -----------------
 
 
-def _score_jobs(positive: set, difficult: set, exclude_cert: bool) -> List[Dict]:
-    """job_tags로 직업을 채점한다.
+def _rebuild_matches(keywords: List[str]) -> list:
+    """저장된 태그 코드 목록을 tagging.TagMatch로 되살린다(keywords는 코드 자체를 담는다).
 
-    - D(해본 일) / E(하고 싶은 일) / F(자신 있는 일)에서 잡힌 태그가 직업의
-      REQUIRED / BONUS 태그와 겹치면 weight만큼 더한다.
-    - C(하기 어려운 일)에서 잡힌 태그가 직업의 EXCLUDE_IF_DIFFICULT에 걸리면 제외한다.
-    - G(자격증)에서 '없음'이 잡히면 자격증이 필요한 직업을 제외한다.
+    stt_text를 다시 분석하지 않고, submit_voice_answer 때 이미 뽑아 저장해 둔 코드로
+    바로 재구성한다 — vectorize_tags()는 tag_id/category만 보고 keywords 필드는 표시용.
     """
-    cert_required = store.jobs_requiring_cert() if exclude_cert else set()
-
-    by_job: Dict[int, Dict] = {}
-    for row in store.recommendable_job_tags():
-        entry = by_job.setdefault(
-            row["job_id"], {"score": 0, "matched": [], "excluded": False}
-        )
-        code = row["tag_code"]
-        if row["role"] == "EXCLUDE_IF_DIFFICULT":
-            if code in difficult:
-                entry["excluded"] = True
+    by_id = tag_definition_by_id()
+    matches = []
+    for code in keywords:
+        definition = by_id.get(code)
+        if definition is None:
             continue
-        if code in positive:
-            entry["score"] += row["weight"]
-            if code not in entry["matched"]:
-                entry["matched"].append(code)
-
-    scored = [
-        {"id": job_id, "score": data["score"], "matchedKeywords": data["matched"]}
-        for job_id, data in by_job.items()
-        if not data["excluded"] and data["score"] > 0 and job_id not in cert_required
-    ]
-    # 점수 내림차순, 동점이면 매칭 태그 수 -> id 순으로 안정 정렬
-    scored.sort(key=lambda x: (-x["score"], -len(x["matchedKeywords"]), x["id"]))
-    return scored
+        matches.append(
+            voice_engine.TagMatch(
+                tag_id=code, category=definition.category, label=definition.label, keywords=(code,)
+            )
+        )
+    return matches
 
 
 @router.post(
@@ -316,24 +312,28 @@ def create_voice_recommendations(
             missing=missing,
         )
 
-    # D 해본 일 / E 하고 싶은 일 / F 자신 있는 일 -> 점수를 올리는 신호
-    positive = set()
+    # D 해본 일 / E 하고 싶은 일 / F 자신 있는 일 -> 82축 벡터를 만드는 긍정 신호
+    positive_matches = []
     for key in ("D", "E", "F"):
         if key in answers:
-            positive.update(answers[key]["keywords"])
-    # C 하기 어려운 일 -> 제외 조건
-    difficult = set(answers["C"]["keywords"]) if "C" in answers else set()
+            positive_matches.extend(_rebuild_matches(answers[key]["keywords"]))
+    # C 하기 어려운 일 -> barrier 하드필터로 제외
+    barrier_tag_ids = set(answers["C"]["keywords"]) if "C" in answers else set()
     # G 자격증 -> '없음'만 잡혔으면 자격증이 필요한 직업을 뺀다
     cert_keywords = set(answers["G"]["keywords"]) if "G" in answers else set()
     exclude_cert = "CERT_없음" in cert_keywords and "CERT_있음" not in cert_keywords
+    cert_required = store.jobs_requiring_cert() if exclude_cert else set()
 
-    scored = _score_jobs(positive, difficult, exclude_cert)
-    is_fallback = not scored
-    if is_fallback:
-        scored = [
-            {"id": job_id, "score": 0, "matchedKeywords": []}
-            for job_id in store.fallback_job_ids(RECOMMENDATION_LIMIT)
-        ]
+    with store.get_db() as db:
+        scored, is_fallback = voice_engine.score_and_rank(
+            db, positive_matches, barrier_tag_ids, cert_required, top_k=RECOMMENDATION_LIMIT
+        )
+        scored = [{"id": s["job_id"], "score": s["score"], "matchedKeywords": s["matchedKeywords"]} for s in scored]
+        if is_fallback:
+            scored = [
+                {"id": job_id, "score": 0, "matchedKeywords": []}
+                for job_id in store.fallback_job_ids(RECOMMENDATION_LIMIT)
+            ]
     scored = scored[:RECOMMENDATION_LIMIT]
 
     jobs_by_id = store.fetch_jobs([s["id"] for s in scored])
@@ -349,7 +349,8 @@ def create_voice_recommendations(
         job["score"] = entry["score"]
         items.append(job)
 
-    tag_labels = store.all_tag_labels()
+    tag_labels = {d.id: d.label for d in tag_definition_by_id().values()}
+    tag_labels.update(store.all_tag_labels())  # G(CERT_있음/없음)는 기존 tags 테이블에만 있음
     reasons = voice_llm.build_reasons(items, answers, tag_labels)
     for job in items:
         job["reason"] = reasons.get(job["id"], "")

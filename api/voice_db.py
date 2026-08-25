@@ -137,6 +137,12 @@ def ensure_voice_schema() -> None:
         _seed_cert_tags(db)
         _seed_voice_questions(db)
 
+        # KNOW 82축 벡터 + barrier 제외를 채워서 D/E/F 추천이 27개가 아니라 538개
+        # 전체 직무를 후보로 쓰게 한다(voice_engine.py, skillmatch-voice-backend에서 이식).
+        from voice_engine import ensure_voice_engine_data
+
+        ensure_voice_engine_data(db)
+
 
 def _seed_cert_tags(db) -> None:
     """G(자격증) 답변을 담을 CERT 분류 태그를 채운다."""
@@ -409,10 +415,15 @@ def recommendable_job_tags() -> List[Dict]:
 
 
 def jobs_requiring_cert() -> set:
-    """추천 대상 중 자격증이 필요한 직업 id. G 답변으로 걸러낼 때 쓴다."""
+    """추천 후보(538개, is_voice_recommendable) 중 자격증이 필요한 직업 id.
+
+    G 답변으로 걸러낼 때 쓴다. 주의: requires_cert는 기존 27개 파일럿 직업만 사람이
+    채운 값이라(538개 중 4건만 1) 새로 편입된 ~511개는 실제로 자격증이 필요해도 여기
+    걸리지 않는다 — 데이터 갱신이 필요한 알려진 한계다.
+    """
     with get_db() as db:
         rows = db.execute(
-            "SELECT id FROM jobs WHERE is_recommendable = 1 AND requires_cert = 1"
+            "SELECT id FROM jobs WHERE is_voice_recommendable = 1 AND requires_cert = 1"
         ).fetchall()
     return {r["id"] for r in rows}
 
@@ -433,7 +444,7 @@ def fallback_job_ids(limit: int) -> List[int]:
     """태그 매칭이 하나도 안 될 때 보여줄 기본 추천(자격증 불필요한 직업 우선)."""
     with get_db() as db:
         rows = db.execute(
-            "SELECT id FROM jobs WHERE is_recommendable = 1 "
+            "SELECT id FROM jobs WHERE is_voice_recommendable = 1 "
             "ORDER BY requires_cert, id LIMIT ?",
             (limit,),
         ).fetchall()
@@ -461,7 +472,9 @@ def save_recommendations(session_id: str, items: List[Dict], is_fallback: bool) 
                     session_id,
                     item["id"],
                     rank,
-                    int(item.get("score", 0)),
+                    # 2026-08-26: 82축 코사인 유사도는 0~1 소수라 int()로 자르면 전부
+                    # 0이 돼버린다(기존 job_tags 정수 가중치 스코어 시절 코드). float로 저장.
+                    float(item.get("score", 0)),
                     1 if is_fallback else 0,
                     item.get("reason"),
                     json.dumps(item.get("matchedKeywords", []), ensure_ascii=False),
