@@ -14,6 +14,7 @@ from models import (
     JobItem,
     JobListResponse,
 )
+from certifications import router as certifications_router
 from voice import router as voice_router
 from voice_db import ensure_voice_schema
 
@@ -42,6 +43,9 @@ app.add_middleware(
 
 # 음성 상담 엔드포인트 3개 (POST /api/sessions, .../voice-answers, .../voice-recommendations)
 app.include_router(voice_router)
+
+# 자격증 카탈로그 조회 (읽기 전용)
+app.include_router(certifications_router)
 
 
 def custom_openapi():
@@ -184,6 +188,9 @@ def root():
             "POST /api/sessions": "음성 상담 세션 생성",
             "POST /api/sessions/{sessionId}/voice-answers": "음성 답변 업로드(STT)",
             "POST /api/sessions/{sessionId}/voice-recommendations": "음성 답변 기반 직무 추천",
+            "GET /api/certifications": "자격증 목록·검색",
+            "GET /api/certifications/groups": "자격증 분야 그룹",
+            "GET /api/certifications/{certCode}": "자격증 상세 + 연결 직무",
         },
     }
 

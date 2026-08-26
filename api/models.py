@@ -110,3 +110,47 @@ class ApiErrorResponse(BaseModel):
     """오류 응답은 항상 {"detail": {errorCode, message, questionKey, missing}} 형태."""
 
     detail: ApiErrorDetail
+
+
+# --- 자격증 카탈로그 (GET /api/certifications ...) ---
+
+
+class CertificationItem(BaseModel):
+    certCode: str
+    certName: str
+    grade: str                          # 기술사·기능장·기사·산업기사·기능사 등
+    fieldOfficial: Optional[str]        # Q-net 직무분야
+    fieldGroup: Optional[str]           # 화면용 분야 그룹
+    kind: str                           # national_tech | national_pro | private_certified
+    commonRank: Optional[int]           # 그룹 내 노출 순서
+    jobCodes: List[str]                 # KECO 4자리 세분류 코드
+    verified: bool                      # jobCodes 사람 검수 여부
+
+
+class CertificationListResponse(BaseModel):
+    total: int
+    items: List[CertificationItem]
+
+
+class CertificationLinkedJob(BaseModel):
+    id: int
+    name: str
+    easyName: Optional[str]
+    categoryName: str
+    isVoiceRecommendable: bool
+
+
+class CertificationDetail(CertificationItem):
+    linkedJobs: List[CertificationLinkedJob]
+
+
+class CertificationGroup(BaseModel):
+    code: str
+    count: int
+
+
+class CertificationGroupList(BaseModel):
+    items: List[CertificationGroup]
+    total: int                          # 전체 자격증 수
+    linked: int                         # 직무 연결이 붙은 자격증 수
+    verified: int                       # 사람 검수를 마친 자격증 수

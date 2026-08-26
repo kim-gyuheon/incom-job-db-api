@@ -147,6 +147,12 @@ def ensure_voice_schema() -> None:
 
         ensure_voice_engine_data(db)
 
+        # 자격증 카탈로그(486종)와 자격증-소분류 연결. 다른 기준 데이터와 같은 이유로
+        # 부팅 때 data/cert-catalog.json에서 다시 채운다.
+        from cert_db import ensure_certification_catalog
+
+        ensure_certification_catalog(db)
+
 
 def _seed_cert_tags(db) -> None:
     """G(자격증) 답변을 담을 CERT 분류 태그를 채운다."""
