@@ -65,6 +65,13 @@ class VoiceAnswerRequest(BaseModel):
     audio: AudioPayload
 
 
+class CertMatchItem(BaseModel):
+    code: str                          # 자격증 코드(국가기술자격 코드)
+    name: str
+    grade: Optional[str] = None        # 등급(기사/산업기사/기능사 등)
+    kind: Optional[str] = None         # national_tech 등
+
+
 class VoiceAnswerResponse(BaseModel):
     sessionId: str
     questionKey: str
@@ -73,6 +80,7 @@ class VoiceAnswerResponse(BaseModel):
     keywords: List[str]                # 매칭된 tags.code 목록
     confidence: Optional[float]
     answeredAt: str
+    matchedCertifications: List[CertMatchItem] = []  # G 답변에서 이름이 잡힌 자격증(최대 3개)
 
 
 class RecommendedJob(JobItem):

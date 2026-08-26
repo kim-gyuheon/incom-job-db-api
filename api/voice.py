@@ -14,6 +14,7 @@ from typing import Dict, List, Optional
 
 from fastapi import APIRouter, HTTPException, Path, Response
 
+import cert_matching
 import stt
 import voice_db as store
 import voice_engine
@@ -238,11 +239,17 @@ def submit_voice_answer(
         )
 
     question_id = question["question_id"]
+    matched_certifications: List[Dict] = []
     if question_key == "G":
         # 자격증 보유 여부는 82축 엔진과 무관해서 기존 CERT_있음/CERT_없음 방식을 그대로 쓴다.
         keywords = voice_llm.extract_tag_codes(
             stt_text, store.tags_by_category(question["tag_category"])
         )
+        # CERT_있음/없음(이분법)과 별개로, 문장에 구체적인 자격증 이름이 있으면
+        # data/cert-catalog.json(국가기술자격 486개, 규칙 기반 부분일치)에서 찾아
+        # 최대 3개까지 프론트에 넘긴다 — 이 카탈로그가 기술/사무 계열 위주라 요양보호사·
+        # 미용사 같은 서비스 계열 자격증은 못 잡는다는 한계가 있다(README 참고).
+        matched_certifications = cert_matching.match_certifications(stt_text, limit=3)
     else:
         # C/D/E/F는 skillmatch-voice-backend의 규칙 기반 추출기를 쓴다(LLM 불필요, 부정어
         # 처리 포함). C(하기 어려운 일)는 barrier 태그만, D/E/F(경험/희망/자신)는 긍정 신호
@@ -280,6 +287,7 @@ def submit_voice_answer(
         keywords=keywords,
         confidence=confidence,
         answeredAt=store.to_iso(answered_at),
+        matchedCertifications=matched_certifications,
     )
 
 

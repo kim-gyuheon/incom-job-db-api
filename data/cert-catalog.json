@@ -1,0 +1,4862 @@
+[
+ {
+  "code": "0760",
+  "name": "공장관리기술사",
+  "grade": "기술사",
+  "field_official": "경영.회계.사무",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "1",
+  "job_codes": "[\"0285\"]"
+ },
+ {
+  "code": "1511",
+  "name": "포장기사",
+  "grade": "기사",
+  "field_official": "경영.회계.사무",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "26",
+  "job_codes": "[\"0284\"]"
+ },
+ {
+  "code": "0780",
+  "name": "포장기술사",
+  "grade": "기술사",
+  "field_official": "경영.회계.사무",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "27",
+  "job_codes": "[\"0284\"]"
+ },
+ {
+  "code": "2431",
+  "name": "포장산업기사",
+  "grade": "산업기사",
+  "field_official": "경영.회계.사무",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "28",
+  "job_codes": "[\"0284\"]"
+ },
+ {
+  "code": "1500",
+  "name": "품질경영기사",
+  "grade": "기사",
+  "field_official": "경영.회계.사무",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "29",
+  "job_codes": "[\"0285\"]"
+ },
+ {
+  "code": "2420",
+  "name": "품질경영산업기사",
+  "grade": "산업기사",
+  "field_official": "경영.회계.사무",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "30",
+  "job_codes": "[\"0285\"]"
+ },
+ {
+  "code": "0770",
+  "name": "품질관리기술사",
+  "grade": "기술사",
+  "field_official": "경영.회계.사무",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "31",
+  "job_codes": "[\"0285\"]"
+ },
+ {
+  "code": "6880",
+  "name": "무선설비기능사",
+  "grade": "기능사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "2",
+  "job_codes": "[\"8422\"]"
+ },
+ {
+  "code": "1200",
+  "name": "무선설비기사",
+  "grade": "기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "3",
+  "job_codes": "[\"1312\"]"
+ },
+ {
+  "code": "2200",
+  "name": "무선설비산업기사",
+  "grade": "산업기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "4",
+  "job_codes": "[\"8422\"]"
+ },
+ {
+  "code": "7730",
+  "name": "방송통신기능사",
+  "grade": "기능사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "5",
+  "job_codes": "[\"8421\"]"
+ },
+ {
+  "code": "1194",
+  "name": "방송통신기사",
+  "grade": "기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "6",
+  "job_codes": "[\"1312\"]"
+ },
+ {
+  "code": "2194",
+  "name": "방송통신산업기사",
+  "grade": "산업기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "7",
+  "job_codes": "[\"8421\"]"
+ },
+ {
+  "code": "1324",
+  "name": "빅데이터분석기사",
+  "grade": "기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "8",
+  "job_codes": "[\"1352\"]"
+ },
+ {
+  "code": "2193",
+  "name": "사무자동화산업기사",
+  "grade": "산업기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "9",
+  "job_codes": "[\"1332\"]"
+ },
+ {
+  "code": "6893",
+  "name": "전파전자통신기능사",
+  "grade": "기능사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "10",
+  "job_codes": "[\"8422\"]"
+ },
+ {
+  "code": "1195",
+  "name": "전파전자통신기사",
+  "grade": "기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "11",
+  "job_codes": "[\"1312\"]"
+ },
+ {
+  "code": "2195",
+  "name": "전파전자통신산업기사",
+  "grade": "산업기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "12",
+  "job_codes": "[\"8422\"]"
+ },
+ {
+  "code": "0601",
+  "name": "정보관리기술사",
+  "grade": "기술사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "13",
+  "job_codes": "[\"1320\"]"
+ },
+ {
+  "code": "6892",
+  "name": "정보기기운용기능사",
+  "grade": "기능사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "14",
+  "job_codes": "[\"8419\"]"
+ },
+ {
+  "code": "1325",
+  "name": "정보보안기사",
+  "grade": "기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "15",
+  "job_codes": "[\"1342\"]"
+ },
+ {
+  "code": "2325",
+  "name": "정보보안산업기사",
+  "grade": "산업기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "16",
+  "job_codes": "[\"1342\"]"
+ },
+ {
+  "code": "1320",
+  "name": "정보처리기사",
+  "grade": "기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "17",
+  "job_codes": "[\"1332\"]"
+ },
+ {
+  "code": "2290",
+  "name": "정보처리산업기사",
+  "grade": "산업기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "18",
+  "job_codes": "[\"1332\"]"
+ },
+ {
+  "code": "7786",
+  "name": "정보통신기능사",
+  "grade": "기능사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "19",
+  "job_codes": "[\"8423\"]"
+ },
+ {
+  "code": "1192",
+  "name": "정보통신기사",
+  "grade": "기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "20",
+  "job_codes": "[\"1312\"]"
+ },
+ {
+  "code": "0621",
+  "name": "정보통신기술사",
+  "grade": "기술사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "21",
+  "job_codes": "[\"1312\"]"
+ },
+ {
+  "code": "2192",
+  "name": "정보통신산업기사",
+  "grade": "산업기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "22",
+  "job_codes": "[\"1312\"]"
+ },
+ {
+  "code": "1998",
+  "name": "컴퓨터시스템기사",
+  "grade": "기사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "23",
+  "job_codes": "[\"1320\"]"
+ },
+ {
+  "code": "0622",
+  "name": "컴퓨터시스템응용기술사",
+  "grade": "기술사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "24",
+  "job_codes": "[\"1320\"]"
+ },
+ {
+  "code": "3920",
+  "name": "통신설비기능장",
+  "grade": "기능장",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "25",
+  "job_codes": "[\"8422\"]"
+ },
+ {
+  "code": "6921",
+  "name": "프로그래밍기능사",
+  "grade": "기능사",
+  "field_official": "정보통신",
+  "field_group": "office_it",
+  "kind": "national_tech",
+  "rank": "32",
+  "job_codes": "[\"1332\"]"
+ },
+ {
+  "code": "7170",
+  "name": "거푸집기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "6",
+  "job_codes": "[\"7016\"]"
+ },
+ {
+  "code": "7132",
+  "name": "건설재료시험기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "10",
+  "job_codes": "[\"1407\"]"
+ },
+ {
+  "code": "1750",
+  "name": "건설재료시험기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "11",
+  "job_codes": "[\"1407\"]"
+ },
+ {
+  "code": "2600",
+  "name": "건설재료시험산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "12",
+  "job_codes": "[\"1407\"]"
+ },
+ {
+  "code": "0490",
+  "name": "건축구조기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "13",
+  "job_codes": "[\"1402\"]"
+ },
+ {
+  "code": "0501",
+  "name": "건축기계설비기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "14",
+  "job_codes": "[\"1402\"]"
+ },
+ {
+  "code": "1630",
+  "name": "건축기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "15",
+  "job_codes": "[\"1402\"]"
+ },
+ {
+  "code": "7150",
+  "name": "건축도장기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "16",
+  "job_codes": "[\"7026\"]"
+ },
+ {
+  "code": "7130",
+  "name": "건축목공기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "17",
+  "job_codes": "[\"7016\"]"
+ },
+ {
+  "code": "2253",
+  "name": "건축목공산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "18",
+  "job_codes": "[\"7016\"]"
+ },
+ {
+  "code": "3611",
+  "name": "건축목재시공기능장",
+  "grade": "기능장",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "19",
+  "job_codes": "[\"7016\"]"
+ },
+ {
+  "code": "2530",
+  "name": "건축산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "20",
+  "job_codes": "[\"1402\"]"
+ },
+ {
+  "code": "1632",
+  "name": "건축설비기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "21",
+  "job_codes": "[\"1402\"]"
+ },
+ {
+  "code": "2531",
+  "name": "건축설비산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "22",
+  "job_codes": "[\"1402\"]"
+ },
+ {
+  "code": "0510",
+  "name": "건축시공기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "23",
+  "job_codes": "[\"1402\"]"
+ },
+ {
+  "code": "3621",
+  "name": "건축일반시공기능장",
+  "grade": "기능장",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "24",
+  "job_codes": "[\"7019\"]"
+ },
+ {
+  "code": "2251",
+  "name": "건축일반시공산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "25",
+  "job_codes": "[\"1402\"]"
+ },
+ {
+  "code": "0511",
+  "name": "건축품질시험기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "26",
+  "job_codes": "[\"1407\"]"
+ },
+ {
+  "code": "6981",
+  "name": "공간정보융합기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "27",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "2331",
+  "name": "공간정보융합산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "28",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "1751",
+  "name": "교통기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "34",
+  "job_codes": "[\"1405\"]"
+ },
+ {
+  "code": "0951",
+  "name": "교통기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "35",
+  "job_codes": "[\"1405\"]"
+ },
+ {
+  "code": "2751",
+  "name": "교통산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "36",
+  "job_codes": "[\"1405\"]"
+ },
+ {
+  "code": "7862",
+  "name": "굴착기운전기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "37",
+  "job_codes": "[\"7040\"]"
+ },
+ {
+  "code": "7102",
+  "name": "금속재창호기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "38",
+  "job_codes": "[\"7027\"]"
+ },
+ {
+  "code": "7861",
+  "name": "기중기운전기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "40",
+  "job_codes": "[\"7040\"]"
+ },
+ {
+  "code": "0470",
+  "name": "농어업토목기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "41",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "0420",
+  "name": "도로및공항기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "44",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "7180",
+  "name": "도배기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "45",
+  "job_codes": "[\"7025\"]"
+ },
+ {
+  "code": "1350",
+  "name": "도시계획기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "46",
+  "job_codes": "[\"1405\"]"
+ },
+ {
+  "code": "0650",
+  "name": "도시계획기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "47",
+  "job_codes": "[\"1405\"]"
+ },
+ {
+  "code": "7660",
+  "name": "도화기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "48",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "7866",
+  "name": "로더운전기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "49",
+  "job_codes": "[\"7040\"]"
+ },
+ {
+  "code": "7871",
+  "name": "롤러운전기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "50",
+  "job_codes": "[\"7040\"]"
+ },
+ {
+  "code": "7110",
+  "name": "미장기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "51",
+  "job_codes": "[\"7021\"]"
+ },
+ {
+  "code": "7030",
+  "name": "방수기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "55",
+  "job_codes": "[\"7022\"]"
+ },
+ {
+  "code": "2630",
+  "name": "방수산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "56",
+  "job_codes": "[\"7022\"]"
+ },
+ {
+  "code": "6213",
+  "name": "배관기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "58",
+  "job_codes": "[\"7031\"]"
+ },
+ {
+  "code": "3081",
+  "name": "배관기능장",
+  "grade": "기능장",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "59",
+  "job_codes": "[\"7031\"]"
+ },
+ {
+  "code": "2041",
+  "name": "배관산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "60",
+  "job_codes": "[\"7031\"]"
+ },
+ {
+  "code": "7863",
+  "name": "불도저운전기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "61",
+  "job_codes": "[\"7040\"]"
+ },
+ {
+  "code": "7120",
+  "name": "비계기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "62",
+  "job_codes": "[\"7019\"]"
+ },
+ {
+  "code": "0460",
+  "name": "상하수도기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "69",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "6990",
+  "name": "석공기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "70",
+  "job_codes": "[\"7015\"]"
+ },
+ {
+  "code": "0451",
+  "name": "수자원개발기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "72",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "7152",
+  "name": "실내건축기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "74",
+  "job_codes": "[\"7029\"]"
+ },
+ {
+  "code": "1282",
+  "name": "실내건축기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "75",
+  "job_codes": "[\"1402\"]"
+ },
+ {
+  "code": "2282",
+  "name": "실내건축산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "76",
+  "job_codes": "[\"1402\"]"
+ },
+ {
+  "code": "7930",
+  "name": "양화장치운전기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "77",
+  "job_codes": "[\"7040\"]"
+ },
+ {
+  "code": "7161",
+  "name": "온수온돌기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "78",
+  "job_codes": "[\"7031\"]"
+ },
+ {
+  "code": "7151",
+  "name": "유리시공기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "80",
+  "job_codes": "[\"7025\"]"
+ },
+ {
+  "code": "1550",
+  "name": "응용지질기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "81",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "7612",
+  "name": "잠수기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "88",
+  "job_codes": "[\"7059\"]"
+ },
+ {
+  "code": "3911",
+  "name": "잠수기능장",
+  "grade": "기능장",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "89",
+  "job_codes": "[\"7059\"]"
+ },
+ {
+  "code": "2521",
+  "name": "잠수산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "90",
+  "job_codes": "[\"7059\"]"
+ },
+ {
+  "code": "7061",
+  "name": "전산응용건축제도기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "92",
+  "job_codes": "[\"1402\"]"
+ },
+ {
+  "code": "7072",
+  "name": "전산응용토목제도기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "93",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "7900",
+  "name": "조경기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "94",
+  "job_codes": "[\"1404\"]"
+ },
+ {
+  "code": "1370",
+  "name": "조경기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "95",
+  "job_codes": "[\"1404\"]"
+ },
+ {
+  "code": "0670",
+  "name": "조경기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "96",
+  "job_codes": "[\"1404\"]"
+ },
+ {
+  "code": "2320",
+  "name": "조경산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "97",
+  "job_codes": "[\"1404\"]"
+ },
+ {
+  "code": "7070",
+  "name": "조적기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "98",
+  "job_codes": "[\"7017\"]"
+ },
+ {
+  "code": "7875",
+  "name": "지게차운전기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "99",
+  "job_codes": "[\"7040\"]"
+ },
+ {
+  "code": "7680",
+  "name": "지도제작기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "100",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "7650",
+  "name": "지적기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "101",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "1390",
+  "name": "지적기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "102",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "0690",
+  "name": "지적기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "103",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "2340",
+  "name": "지적산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "104",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "0825",
+  "name": "지질및지반기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "105",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "7483",
+  "name": "천공기운전기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "106",
+  "job_codes": "[\"7040\"]"
+ },
+ {
+  "code": "7864",
+  "name": "천장크레인운전기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "107",
+  "job_codes": "[\"7040\"]"
+ },
+ {
+  "code": "7080",
+  "name": "철근기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "108",
+  "job_codes": "[\"7013\"]"
+ },
+ {
+  "code": "0430",
+  "name": "철도기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "109",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "7010",
+  "name": "철도토목기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "110",
+  "job_codes": "[\"7052\"]"
+ },
+ {
+  "code": "1760",
+  "name": "철도토목기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "111",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "6980",
+  "name": "측량기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "115",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "1380",
+  "name": "측량및지형공간정보기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "116",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "0680",
+  "name": "측량및지형공간정보기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "117",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "2330",
+  "name": "측량및지형공간정보산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "118",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "7835",
+  "name": "컨테이너크레인운전기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "122",
+  "job_codes": "[\"7040\"]"
+ },
+ {
+  "code": "7020",
+  "name": "콘크리트기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "123",
+  "job_codes": "[\"7014\"]"
+ },
+ {
+  "code": "1048",
+  "name": "콘크리트기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "124",
+  "job_codes": "[\"1407\"]"
+ },
+ {
+  "code": "2048",
+  "name": "콘크리트산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "125",
+  "job_codes": "[\"1407\"]"
+ },
+ {
+  "code": "7834",
+  "name": "타워크레인운전기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "126",
+  "job_codes": "[\"7040\"]"
+ },
+ {
+  "code": "7210",
+  "name": "타일기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "127",
+  "job_codes": "[\"7017\"]"
+ },
+ {
+  "code": "0400",
+  "name": "토목구조기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "128",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "1250",
+  "name": "토목기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "129",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "2240",
+  "name": "토목산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "130",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "0480",
+  "name": "토목시공기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "131",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "0481",
+  "name": "토목품질시험기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "132",
+  "job_codes": "[\"1407\"]"
+ },
+ {
+  "code": "0390",
+  "name": "토질및기초기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "133",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "7103",
+  "name": "플라스틱창호기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "134",
+  "job_codes": "[\"7027\"]"
+ },
+ {
+  "code": "7670",
+  "name": "항공사진기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "135",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "6351",
+  "name": "항로표지기능사",
+  "grade": "기능사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "136",
+  "job_codes": "[\"7059\"]"
+ },
+ {
+  "code": "1351",
+  "name": "항로표지기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "137",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "2351",
+  "name": "항로표지산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "138",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "0410",
+  "name": "항만및해안기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "139",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "1403",
+  "name": "해양공학기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "140",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "0700",
+  "name": "해양기술사",
+  "grade": "기술사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "141",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "1402",
+  "name": "해양자원개발기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "142",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "2350",
+  "name": "해양조사산업기사",
+  "grade": "산업기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "143",
+  "job_codes": "[\"1406\"]"
+ },
+ {
+  "code": "1401",
+  "name": "해양환경기사",
+  "grade": "기사",
+  "field_official": "건설",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "144",
+  "job_codes": "[\"1403\"]"
+ },
+ {
+  "code": "7380",
+  "name": "광산보안기능사",
+  "grade": "기능사",
+  "field_official": "광업자원",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "29",
+  "job_codes": "[\"7059\"]"
+ },
+ {
+  "code": "1450",
+  "name": "광산보안기사",
+  "grade": "기사",
+  "field_official": "광업자원",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "30",
+  "job_codes": "[\"7059\"]"
+ },
+ {
+  "code": "2135",
+  "name": "광산보안산업기사",
+  "grade": "산업기사",
+  "field_official": "광업자원",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "31",
+  "job_codes": "[\"7059\"]"
+ },
+ {
+  "code": "1575",
+  "name": "광해방지기사",
+  "grade": "기사",
+  "field_official": "광업자원",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "32",
+  "job_codes": "[\"7059\"]"
+ },
+ {
+  "code": "0575",
+  "name": "광해방지기술사",
+  "grade": "기술사",
+  "field_official": "광업자원",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "33",
+  "job_codes": "[\"7059\"]"
+ },
+ {
+  "code": "7330",
+  "name": "시추기능사",
+  "grade": "기능사",
+  "field_official": "광업자원",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "73",
+  "job_codes": "[\"7051\"]"
+ },
+ {
+  "code": "0570",
+  "name": "자원관리기술사",
+  "grade": "기술사",
+  "field_official": "광업자원",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "87",
+  "job_codes": "[\"7059\"]"
+ },
+ {
+  "code": "1140",
+  "name": "화약류관리기사",
+  "grade": "기사",
+  "field_official": "광업자원",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "146",
+  "job_codes": "[\"7051\"]"
+ },
+ {
+  "code": "0591",
+  "name": "화약류관리기술사",
+  "grade": "기술사",
+  "field_official": "광업자원",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "147",
+  "job_codes": "[\"7059\"]"
+ },
+ {
+  "code": "2130",
+  "name": "화약류관리산업기사",
+  "grade": "산업기사",
+  "field_official": "광업자원",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "148",
+  "job_codes": "[\"7051\"]"
+ },
+ {
+  "code": "7970",
+  "name": "화약취급기능사",
+  "grade": "기능사",
+  "field_official": "광업자원",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "149",
+  "job_codes": "[\"7051\"]"
+ },
+ {
+  "code": "6335",
+  "name": "가스기능사",
+  "grade": "기능사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "1",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "3375",
+  "name": "가스기능장",
+  "grade": "기능장",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "2",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "1471",
+  "name": "가스기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "3",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "0752",
+  "name": "가스기술사",
+  "grade": "기술사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "4",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "2471",
+  "name": "가스산업기사",
+  "grade": "산업기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "5",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "1440",
+  "name": "건설안전기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "7",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "0740",
+  "name": "건설안전기술사",
+  "grade": "기술사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "8",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "2390",
+  "name": "건설안전산업기사",
+  "grade": "산업기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "9",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "0710",
+  "name": "기계안전기술사",
+  "grade": "기술사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "39",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "1442",
+  "name": "농작업안전보건기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "42",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "1617",
+  "name": "누설비파괴검사기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "43",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "7471",
+  "name": "방사선비파괴검사기능사",
+  "grade": "기능사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "52",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "1611",
+  "name": "방사선비파괴검사기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "53",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "2611",
+  "name": "방사선비파괴검사산업기사",
+  "grade": "산업기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "54",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "1443",
+  "name": "방재기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "57",
+  "job_codes": "[\"1582\"]"
+ },
+ {
+  "code": "0802",
+  "name": "비파괴검사기술사",
+  "grade": "기술사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "63",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "1431",
+  "name": "산업안전기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "64",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "2381",
+  "name": "산업안전산업기사",
+  "grade": "산업기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "65",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "1472",
+  "name": "산업위생관리기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "66",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "0751",
+  "name": "산업위생관리기술사",
+  "grade": "기술사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "67",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "2472",
+  "name": "산업위생관리산업기사",
+  "grade": "산업기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "68",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "0750",
+  "name": "소방기술사",
+  "grade": "기술사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "71",
+  "job_codes": "[\"1581\"]"
+ },
+ {
+  "code": "1615",
+  "name": "와전류비파괴검사기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "79",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "1875",
+  "name": "인간공학기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "82",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "0875",
+  "name": "인간공학기술사",
+  "grade": "기술사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "83",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "7473",
+  "name": "자기비파괴검사기능사",
+  "grade": "기능사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "84",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "1613",
+  "name": "자기비파괴검사기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "85",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "2613",
+  "name": "자기비파괴검사산업기사",
+  "grade": "산업기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "86",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "0730",
+  "name": "전기안전기술사",
+  "grade": "기술사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "91",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "7472",
+  "name": "초음파비파괴검사기능사",
+  "grade": "기능사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "112",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "1612",
+  "name": "초음파비파괴검사기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "113",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "2612",
+  "name": "초음파비파괴검사산업기사",
+  "grade": "산업기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "114",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "7474",
+  "name": "침투비파괴검사기능사",
+  "grade": "기능사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "119",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "1614",
+  "name": "침투비파괴검사기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "120",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "2614",
+  "name": "침투비파괴검사산업기사",
+  "grade": "산업기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "121",
+  "job_codes": "[\"1583\"]"
+ },
+ {
+  "code": "0720",
+  "name": "화공안전기술사",
+  "grade": "기술사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "145",
+  "job_codes": "[\"1584\"]"
+ },
+ {
+  "code": "1441",
+  "name": "화재감식평가기사",
+  "grade": "기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "150",
+  "job_codes": "[\"1582\"]"
+ },
+ {
+  "code": "2441",
+  "name": "화재감식평가산업기사",
+  "grade": "산업기사",
+  "field_official": "안전관리",
+  "field_group": "construction",
+  "kind": "national_tech",
+  "rank": "151",
+  "job_codes": "[\"1582\"]"
+ },
+ {
+  "code": "6301",
+  "name": "농기계운전기능사",
+  "grade": "기능사",
+  "field_official": "운전.운송",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "24",
+  "job_codes": "[\"6223\"]"
+ },
+ {
+  "code": "2045",
+  "name": "철도운송산업기사",
+  "grade": "산업기사",
+  "field_official": "운전.운송",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "61",
+  "job_codes": "[\"6219\"]"
+ },
+ {
+  "code": "0080",
+  "name": "건설기계기술사",
+  "grade": "기술사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "1",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "1040",
+  "name": "건설기계설비기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "2",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "2040",
+  "name": "건설기계설비산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "3",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "6298",
+  "name": "건설기계정비기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "4",
+  "job_codes": "[\"8117\"]"
+ },
+ {
+  "code": "3120",
+  "name": "건설기계정비기능장",
+  "grade": "기능장",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "5",
+  "job_codes": "[\"8117\"]"
+ },
+ {
+  "code": "1050",
+  "name": "건설기계정비기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "6",
+  "job_codes": "[\"8117\"]"
+ },
+ {
+  "code": "2050",
+  "name": "건설기계정비산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "7",
+  "job_codes": "[\"8117\"]"
+ },
+ {
+  "code": "6320",
+  "name": "공조냉동기계기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "8",
+  "job_codes": "[\"8115\"]"
+ },
+ {
+  "code": "1730",
+  "name": "공조냉동기계기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "9",
+  "job_codes": "[\"8115\"]"
+ },
+ {
+  "code": "0071",
+  "name": "공조냉동기계기술사",
+  "grade": "기술사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "10",
+  "job_codes": "[\"8115\"]"
+ },
+ {
+  "code": "2590",
+  "name": "공조냉동기계산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "11",
+  "job_codes": "[\"8115\"]"
+ },
+ {
+  "code": "6051",
+  "name": "궤도장비정비기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "12",
+  "job_codes": "[\"8129\"]"
+ },
+ {
+  "code": "1051",
+  "name": "궤도장비정비기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "13",
+  "job_codes": "[\"8129\"]"
+ },
+ {
+  "code": "2051",
+  "name": "궤도장비정비산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "14",
+  "job_codes": "[\"8129\"]"
+ },
+ {
+  "code": "1027",
+  "name": "그린전동자동차기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "15",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "6105",
+  "name": "금형기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "16",
+  "job_codes": "[\"8131\"]"
+ },
+ {
+  "code": "3061",
+  "name": "금형기능장",
+  "grade": "기능장",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "17",
+  "job_codes": "[\"8131\"]"
+ },
+ {
+  "code": "0012",
+  "name": "금형기술사",
+  "grade": "기술사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "18",
+  "job_codes": "[\"8131\"]"
+ },
+ {
+  "code": "3021",
+  "name": "기계가공기능장",
+  "grade": "기능장",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "19",
+  "job_codes": "[\"8132\"]"
+ },
+ {
+  "code": "6042",
+  "name": "기계가공조립기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "20",
+  "job_codes": "[\"8132\"]"
+ },
+ {
+  "code": "0872",
+  "name": "기계기술사",
+  "grade": "기술사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "21",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "2031",
+  "name": "기계설계산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "22",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "2011",
+  "name": "기계조립산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "23",
+  "job_codes": "[\"8161\"]"
+ },
+ {
+  "code": "1023",
+  "name": "농업기계기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "25",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "2027",
+  "name": "농업기계산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "26",
+  "job_codes": "[\"8119\"]"
+ },
+ {
+  "code": "6300",
+  "name": "농업기계정비기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "27",
+  "job_codes": "[\"8119\"]"
+ },
+ {
+  "code": "6033",
+  "name": "반도체설비보전기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "28",
+  "job_codes": "[\"8112\"]"
+ },
+ {
+  "code": "1024",
+  "name": "사출금형기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "29",
+  "job_codes": "[\"8131\"]"
+ },
+ {
+  "code": "2028",
+  "name": "사출금형산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "30",
+  "job_codes": "[\"8131\"]"
+ },
+ {
+  "code": "0060",
+  "name": "산업기계설비기술사",
+  "grade": "기술사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "31",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "6960",
+  "name": "선박기관정비기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "32",
+  "job_codes": "[\"8122\"]"
+ },
+ {
+  "code": "6920",
+  "name": "선체건조기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "33",
+  "job_codes": "[\"8122\"]"
+ },
+ {
+  "code": "6910",
+  "name": "선체설계기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "34",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "6837",
+  "name": "설비보전기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "35",
+  "job_codes": "[\"8112\"]"
+ },
+ {
+  "code": "1837",
+  "name": "설비보전기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "36",
+  "job_codes": "[\"8112\"]"
+ },
+ {
+  "code": "2035",
+  "name": "설비보전산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "37",
+  "job_codes": "[\"8112\"]"
+ },
+ {
+  "code": "9771",
+  "name": "스마트공장기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "38",
+  "job_codes": "[\"8150\"]"
+ },
+ {
+  "code": "9772",
+  "name": "스마트공장산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "39",
+  "job_codes": "[\"8150\"]"
+ },
+ {
+  "code": "7940",
+  "name": "승강기기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "40",
+  "job_codes": "[\"8113\"]"
+ },
+ {
+  "code": "1555",
+  "name": "승강기기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "41",
+  "job_codes": "[\"8113\"]"
+ },
+ {
+  "code": "2395",
+  "name": "승강기산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "42",
+  "job_codes": "[\"8113\"]"
+ },
+ {
+  "code": "9774",
+  "name": "이륜자동차정비기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "43",
+  "job_codes": "[\"8129\"]"
+ },
+ {
+  "code": "1021",
+  "name": "일반기계기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "44",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "6836",
+  "name": "자동차보수도장기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "45",
+  "job_codes": "[\"8124\"]"
+ },
+ {
+  "code": "6281",
+  "name": "자동차정비기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "46",
+  "job_codes": "[\"8124\"]"
+ },
+ {
+  "code": "3110",
+  "name": "자동차정비기능장",
+  "grade": "기능장",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "47",
+  "job_codes": "[\"8124\"]"
+ },
+ {
+  "code": "1070",
+  "name": "자동차정비기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "48",
+  "job_codes": "[\"8124\"]"
+ },
+ {
+  "code": "2070",
+  "name": "자동차정비산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "49",
+  "job_codes": "[\"8124\"]"
+ },
+ {
+  "code": "6285",
+  "name": "자동차차체수리기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "50",
+  "job_codes": "[\"8124\"]"
+ },
+ {
+  "code": "6415",
+  "name": "자동화설비기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "51",
+  "job_codes": "[\"8112\"]"
+ },
+ {
+  "code": "2034",
+  "name": "자동화설비산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "52",
+  "job_codes": "[\"8112\"]"
+ },
+ {
+  "code": "6151",
+  "name": "전산응용기계제도기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "53",
+  "job_codes": "[\"8132\"]"
+ },
+ {
+  "code": "6120",
+  "name": "정밀측정기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "54",
+  "job_codes": "[\"1513\"]"
+ },
+ {
+  "code": "2104",
+  "name": "정밀측정산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "55",
+  "job_codes": "[\"1513\"]"
+ },
+ {
+  "code": "0320",
+  "name": "조선기술사",
+  "grade": "기술사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "56",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "2220",
+  "name": "조선산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "57",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "1221",
+  "name": "조선선체기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "58",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "1222",
+  "name": "조선의장기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "59",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "0050",
+  "name": "차량기술사",
+  "grade": "기술사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "60",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "1030",
+  "name": "철도차량기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "62",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "0431",
+  "name": "철도차량기술사",
+  "grade": "기술사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "63",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "2030",
+  "name": "철도차량산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "64",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "6352",
+  "name": "철도차량정비기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "65",
+  "job_codes": "[\"8123\"]"
+ },
+ {
+  "code": "3150",
+  "name": "철도차량정비기능장",
+  "grade": "기능장",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "66",
+  "job_codes": "[\"8123\"]"
+ },
+ {
+  "code": "2025",
+  "name": "컴퓨터응용가공산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "67",
+  "job_codes": "[\"8132\"]"
+ },
+ {
+  "code": "6032",
+  "name": "컴퓨터응용밀링기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "68",
+  "job_codes": "[\"8132\"]"
+ },
+ {
+  "code": "6012",
+  "name": "컴퓨터응용선반기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "69",
+  "job_codes": "[\"8132\"]"
+ },
+ {
+  "code": "6835",
+  "name": "표면실장장비기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "70",
+  "job_codes": "[\"8150\"]"
+ },
+ {
+  "code": "1025",
+  "name": "프레스금형기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "71",
+  "job_codes": "[\"8131\"]"
+ },
+ {
+  "code": "2029",
+  "name": "프레스금형산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "72",
+  "job_codes": "[\"8131\"]"
+ },
+ {
+  "code": "0370",
+  "name": "항공기관기술사",
+  "grade": "기술사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "73",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "1240",
+  "name": "항공기사",
+  "grade": "기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "74",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "6288",
+  "name": "항공기정비기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "75",
+  "job_codes": "[\"8121\"]"
+ },
+ {
+  "code": "0360",
+  "name": "항공기체기술사",
+  "grade": "기술사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "76",
+  "job_codes": "[\"1511\"]"
+ },
+ {
+  "code": "2230",
+  "name": "항공산업기사",
+  "grade": "산업기사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "77",
+  "job_codes": "[\"8121\"]"
+ },
+ {
+  "code": "6289",
+  "name": "항공전기·전자정비기능사",
+  "grade": "기능사",
+  "field_official": "기계",
+  "field_group": "machinery",
+  "kind": "national_tech",
+  "rank": "78",
+  "job_codes": "[\"8121\"]"
+ },
+ {
+  "code": "2177",
+  "name": "3D프린터개발산업기사",
+  "grade": "산업기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "1",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "7785",
+  "name": "3D프린터운용기능사",
+  "grade": "기능사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "2",
+  "job_codes": "[\"8353\"]"
+ },
+ {
+  "code": "0502",
+  "name": "건축전기설비기술사",
+  "grade": "기술사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "3",
+  "job_codes": "[\"1531\"]"
+ },
+ {
+  "code": "2108",
+  "name": "광학기기산업기사",
+  "grade": "산업기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "4",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "1513",
+  "name": "광학기사",
+  "grade": "기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "5",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "1177",
+  "name": "로봇기구개발기사",
+  "grade": "기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "6",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "1178",
+  "name": "로봇소프트웨어개발기사",
+  "grade": "기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "7",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "1179",
+  "name": "로봇하드웨어개발기사",
+  "grade": "기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "8",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "2175",
+  "name": "반도체커스텀레이아웃산업기사",
+  "grade": "산업기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "9",
+  "job_codes": "[\"1532\"]"
+ },
+ {
+  "code": "0230",
+  "name": "발송배전기술사",
+  "grade": "기술사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "10",
+  "job_codes": "[\"1531\"]"
+ },
+ {
+  "code": "0270",
+  "name": "산업계측제어기술사",
+  "grade": "기술사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "11",
+  "job_codes": "[\"1534\"]"
+ },
+ {
+  "code": "1176",
+  "name": "의공기사",
+  "grade": "기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "12",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "2176",
+  "name": "의공산업기사",
+  "grade": "산업기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "13",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "6176",
+  "name": "의료전자기능사",
+  "grade": "기능사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "14",
+  "job_codes": "[\"8329\"]"
+ },
+ {
+  "code": "6801",
+  "name": "임베디드기능사",
+  "grade": "기능사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "15",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "1121",
+  "name": "임베디드기사",
+  "grade": "기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "16",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "1160",
+  "name": "전기공사기사",
+  "grade": "기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "17",
+  "job_codes": "[\"1531\"]"
+ },
+ {
+  "code": "2150",
+  "name": "전기공사산업기사",
+  "grade": "산업기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "18",
+  "job_codes": "[\"1531\"]"
+ },
+ {
+  "code": "7780",
+  "name": "전기기능사",
+  "grade": "기능사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "19",
+  "job_codes": "[\"8311\"]"
+ },
+ {
+  "code": "3380",
+  "name": "전기기능장",
+  "grade": "기능장",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "20",
+  "job_codes": "[\"8311\"]"
+ },
+ {
+  "code": "1150",
+  "name": "전기기사",
+  "grade": "기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "21",
+  "job_codes": "[\"1531\"]"
+ },
+ {
+  "code": "2140",
+  "name": "전기산업기사",
+  "grade": "산업기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "22",
+  "job_codes": "[\"1531\"]"
+ },
+ {
+  "code": "0250",
+  "name": "전기응용기술사",
+  "grade": "기술사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "23",
+  "job_codes": "[\"1531\"]"
+ },
+ {
+  "code": "1741",
+  "name": "전기철도기사",
+  "grade": "기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "24",
+  "job_codes": "[\"1531\"]"
+ },
+ {
+  "code": "0432",
+  "name": "전기철도기술사",
+  "grade": "기술사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "25",
+  "job_codes": "[\"1531\"]"
+ },
+ {
+  "code": "2036",
+  "name": "전기철도산업기사",
+  "grade": "산업기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "26",
+  "job_codes": "[\"1531\"]"
+ },
+ {
+  "code": "6790",
+  "name": "전자기능사",
+  "grade": "기능사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "27",
+  "job_codes": "[\"8360\"]"
+ },
+ {
+  "code": "3410",
+  "name": "전자기능장",
+  "grade": "기능장",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "28",
+  "job_codes": "[\"8329\"]"
+ },
+ {
+  "code": "1170",
+  "name": "전자기사",
+  "grade": "기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "29",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "2170",
+  "name": "전자산업기사",
+  "grade": "산업기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "30",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "0301",
+  "name": "전자응용기술사",
+  "grade": "기술사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "31",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "6785",
+  "name": "전자캐드기능사",
+  "grade": "기능사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "32",
+  "job_codes": "[\"1533\"]"
+ },
+ {
+  "code": "1740",
+  "name": "철도신호기사",
+  "grade": "기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "33",
+  "job_codes": "[\"8340\"]"
+ },
+ {
+  "code": "0261",
+  "name": "철도신호기술사",
+  "grade": "기술사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "34",
+  "job_codes": "[\"1531\"]"
+ },
+ {
+  "code": "2160",
+  "name": "철도신호산업기사",
+  "grade": "산업기사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "35",
+  "job_codes": "[\"8340\"]"
+ },
+ {
+  "code": "6772",
+  "name": "철도전기신호기능사",
+  "grade": "기능사",
+  "field_official": "전기.전자",
+  "field_group": "electric",
+  "kind": "national_tech",
+  "rank": "36",
+  "job_codes": "[\"8340\"]"
+ },
+ {
+  "code": "6224",
+  "name": "가스텅스텐아크용접기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "3",
+  "job_codes": "[\"8241\"]"
+ },
+ {
+  "code": "0130",
+  "name": "금속가공기술사",
+  "grade": "기술사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "7",
+  "job_codes": "[\"1521\"]"
+ },
+ {
+  "code": "7450",
+  "name": "금속도장기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "8",
+  "job_codes": "[\"8251\"]"
+ },
+ {
+  "code": "3221",
+  "name": "금속재료기능장",
+  "grade": "기능장",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "9",
+  "job_codes": "[\"1521\"]"
+ },
+ {
+  "code": "1104",
+  "name": "금속재료기사",
+  "grade": "기사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "10",
+  "job_codes": "[\"1521\"]"
+ },
+ {
+  "code": "0110",
+  "name": "금속재료기술사",
+  "grade": "기술사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "11",
+  "job_codes": "[\"1521\"]"
+ },
+ {
+  "code": "2101",
+  "name": "금속재료산업기사",
+  "grade": "산업기사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "12",
+  "job_codes": "[\"1521\"]"
+ },
+ {
+  "code": "6490",
+  "name": "금속재료시험기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "13",
+  "job_codes": "[\"1522\"]"
+ },
+ {
+  "code": "0094",
+  "name": "금속제련기술사",
+  "grade": "기술사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "14",
+  "job_codes": "[\"1521\"]"
+ },
+ {
+  "code": "0790",
+  "name": "세라믹기술사",
+  "grade": "기술사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "40",
+  "job_codes": "[\"1521\"]"
+ },
+ {
+  "code": "6543",
+  "name": "압연기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "57",
+  "job_codes": "[\"8212\"]"
+ },
+ {
+  "code": "3270",
+  "name": "압연기능장",
+  "grade": "기능장",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "58",
+  "job_codes": "[\"8212\"]"
+ },
+ {
+  "code": "6420",
+  "name": "열처리기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "64",
+  "job_codes": "[\"8212\"]"
+ },
+ {
+  "code": "3100",
+  "name": "용접기능장",
+  "grade": "기능장",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "66",
+  "job_codes": "[\"8241\"]"
+ },
+ {
+  "code": "1022",
+  "name": "용접기사",
+  "grade": "기사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "67",
+  "job_codes": "[\"8241\"]"
+ },
+ {
+  "code": "0011",
+  "name": "용접기술사",
+  "grade": "기술사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "68",
+  "job_codes": "[\"8241\"]"
+ },
+ {
+  "code": "2026",
+  "name": "용접산업기사",
+  "grade": "산업기사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "69",
+  "job_codes": "[\"8241\"]"
+ },
+ {
+  "code": "6225",
+  "name": "이산화탄소가스아크용접기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "77",
+  "job_codes": "[\"8241\"]"
+ },
+ {
+  "code": "6515",
+  "name": "제강기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "85",
+  "job_codes": "[\"8212\"]"
+ },
+ {
+  "code": "3240",
+  "name": "제강기능장",
+  "grade": "기능장",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "86",
+  "job_codes": "[\"8212\"]"
+ },
+ {
+  "code": "6500",
+  "name": "제선기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "92",
+  "job_codes": "[\"8212\"]"
+ },
+ {
+  "code": "3230",
+  "name": "제선기능장",
+  "grade": "기능장",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "93",
+  "job_codes": "[\"8212\"]"
+ },
+ {
+  "code": "6461",
+  "name": "주조기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "94",
+  "job_codes": "[\"8233\"]"
+ },
+ {
+  "code": "3200",
+  "name": "주조기능장",
+  "grade": "기능장",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "95",
+  "job_codes": "[\"8233\"]"
+ },
+ {
+  "code": "2105",
+  "name": "주조산업기사",
+  "grade": "산업기사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "96",
+  "job_codes": "[\"8233\"]"
+ },
+ {
+  "code": "6381",
+  "name": "축로기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "97",
+  "job_codes": "[\"8263\"]"
+ },
+ {
+  "code": "6175",
+  "name": "판금제관기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "100",
+  "job_codes": "[\"8221\"]"
+ },
+ {
+  "code": "3095",
+  "name": "판금제관기능장",
+  "grade": "기능장",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "101",
+  "job_codes": "[\"8221\"]"
+ },
+ {
+  "code": "2012",
+  "name": "판금제관산업기사",
+  "grade": "산업기사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "102",
+  "job_codes": "[\"8221\"]"
+ },
+ {
+  "code": "6480",
+  "name": "표면처리기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "108",
+  "job_codes": "[\"8252\"]"
+ },
+ {
+  "code": "3210",
+  "name": "표면처리기능장",
+  "grade": "기능장",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "109",
+  "job_codes": "[\"8252\"]"
+ },
+ {
+  "code": "0120",
+  "name": "표면처리기술사",
+  "grade": "기술사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "110",
+  "job_codes": "[\"8252\"]"
+ },
+ {
+  "code": "2106",
+  "name": "표면처리산업기사",
+  "grade": "산업기사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "111",
+  "job_codes": "[\"8252\"]"
+ },
+ {
+  "code": "6223",
+  "name": "피복아크용접기능사",
+  "grade": "기능사",
+  "field_official": "재료",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "112",
+  "job_codes": "[\"8241\"]"
+ },
+ {
+  "code": "9775",
+  "name": "바이오공정기능사",
+  "grade": "기능사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "26",
+  "job_codes": "[\"1541\"]"
+ },
+ {
+  "code": "1800",
+  "name": "바이오화학제품제조기사",
+  "grade": "기사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "27",
+  "job_codes": "[\"1541\"]"
+ },
+ {
+  "code": "2570",
+  "name": "바이오화학제품제조산업기사",
+  "grade": "산업기사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "28",
+  "job_codes": "[\"1542\"]"
+ },
+ {
+  "code": "6697",
+  "name": "위험물기능사",
+  "grade": "기능사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "72",
+  "job_codes": "[\"8512\"]"
+ },
+ {
+  "code": "3360",
+  "name": "위험물기능장",
+  "grade": "기능장",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "73",
+  "job_codes": "[\"8512\"]"
+ },
+ {
+  "code": "2121",
+  "name": "위험물산업기사",
+  "grade": "산업기사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "74",
+  "job_codes": "[\"8512\"]"
+ },
+ {
+  "code": "1125",
+  "name": "정밀화학기사",
+  "grade": "기사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "84",
+  "job_codes": "[\"1541\"]"
+ },
+ {
+  "code": "1110",
+  "name": "화공기사",
+  "grade": "기사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "117",
+  "job_codes": "[\"1541\"]"
+ },
+ {
+  "code": "0210",
+  "name": "화공기술사",
+  "grade": "기술사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "118",
+  "job_codes": "[\"1541\"]"
+ },
+ {
+  "code": "1130",
+  "name": "화약류제조기사",
+  "grade": "기사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "119",
+  "job_codes": "[\"1541\"]"
+ },
+ {
+  "code": "2120",
+  "name": "화약류제조산업기사",
+  "grade": "산업기사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "120",
+  "job_codes": "[\"1542\"]"
+ },
+ {
+  "code": "6560",
+  "name": "화학분석기능사",
+  "grade": "기능사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "121",
+  "job_codes": "[\"1542\"]"
+ },
+ {
+  "code": "1563",
+  "name": "화학분석기사",
+  "grade": "기사",
+  "field_official": "화학",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "122",
+  "job_codes": "[\"1542\"]"
+ },
+ {
+  "code": "7931",
+  "name": "남성복기능사",
+  "grade": "기능사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "18",
+  "job_codes": "[\"8632\"]"
+ },
+ {
+  "code": "9776",
+  "name": "봉제기능사",
+  "grade": "기능사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "33",
+  "job_codes": "[\"8623\"]"
+ },
+ {
+  "code": "1297",
+  "name": "섬유기사",
+  "grade": "기사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "36",
+  "job_codes": "[\"1561\"]"
+ },
+ {
+  "code": "0551",
+  "name": "섬유기술사",
+  "grade": "기술사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "37",
+  "job_codes": "[\"1561\"]"
+ },
+ {
+  "code": "2264",
+  "name": "섬유디자인산업기사",
+  "grade": "산업기사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "38",
+  "job_codes": "[\"8611\"]"
+ },
+ {
+  "code": "2277",
+  "name": "섬유산업기사",
+  "grade": "산업기사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "39",
+  "job_codes": "[\"1561\"]"
+ },
+ {
+  "code": "7960",
+  "name": "세탁기능사",
+  "grade": "기능사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "41",
+  "job_codes": "[\"8643\"]"
+ },
+ {
+  "code": "2302",
+  "name": "신발산업기사",
+  "grade": "산업기사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "55",
+  "job_codes": "[\"8642\"]"
+ },
+ {
+  "code": "7904",
+  "name": "신발제조기능사",
+  "grade": "기능사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "56",
+  "job_codes": "[\"8641\"]"
+ },
+ {
+  "code": "7932",
+  "name": "여성복기능사",
+  "grade": "기능사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "63",
+  "job_codes": "[\"8632\"]"
+ },
+ {
+  "code": "1301",
+  "name": "의류기사",
+  "grade": "기사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "75",
+  "job_codes": "[\"1561\"]"
+ },
+ {
+  "code": "0561",
+  "name": "의류기술사",
+  "grade": "기술사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "76",
+  "job_codes": "[\"1561\"]"
+ },
+ {
+  "code": "2301",
+  "name": "패션디자인산업기사",
+  "grade": "산업기사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "103",
+  "job_codes": "[\"8621\"]"
+ },
+ {
+  "code": "2085",
+  "name": "패션머천다이징산업기사",
+  "grade": "산업기사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "104",
+  "job_codes": "[\"8621\"]"
+ },
+ {
+  "code": "7723",
+  "name": "한복기능사",
+  "grade": "기능사",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "115",
+  "job_codes": "[\"8631\"]"
+ },
+ {
+  "code": "3643",
+  "name": "한복기능장",
+  "grade": "기능장",
+  "field_official": "섬유.의복",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "116",
+  "job_codes": "[\"8631\"]"
+ },
+ {
+  "code": "7992",
+  "name": "떡제조기능사",
+  "grade": "기능사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "24",
+  "job_codes": "[\"8712\"]"
+ },
+ {
+  "code": "1540",
+  "name": "수산제조기사",
+  "grade": "기사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "45",
+  "job_codes": "[\"1571\"]"
+ },
+ {
+  "code": "0810",
+  "name": "수산제조기술사",
+  "grade": "기술사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "46",
+  "job_codes": "[\"1571\"]"
+ },
+ {
+  "code": "1541",
+  "name": "식육가공기사",
+  "grade": "기사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "50",
+  "job_codes": "[\"1571\"]"
+ },
+ {
+  "code": "7591",
+  "name": "식품가공기능사",
+  "grade": "기능사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "51",
+  "job_codes": "[\"8729\"]"
+ },
+ {
+  "code": "0800",
+  "name": "식품기술사",
+  "grade": "기술사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "52",
+  "job_codes": "[\"1571\"]"
+ },
+ {
+  "code": "2450",
+  "name": "식품산업기사",
+  "grade": "산업기사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "53",
+  "job_codes": "[\"1572\"]"
+ },
+ {
+  "code": "1530",
+  "name": "식품안전기사",
+  "grade": "기사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "54",
+  "job_codes": "[\"1571\"]"
+ },
+ {
+  "code": "7892",
+  "name": "제과기능사",
+  "grade": "기능사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "87",
+  "job_codes": "[\"8711\"]"
+ },
+ {
+  "code": "3923",
+  "name": "제과기능장",
+  "grade": "기능장",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "88",
+  "job_codes": "[\"8711\"]"
+ },
+ {
+  "code": "4223",
+  "name": "제과산업기사",
+  "grade": "산업기사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "89",
+  "job_codes": "[\"8711\"]"
+ },
+ {
+  "code": "7893",
+  "name": "제빵기능사",
+  "grade": "기능사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "90",
+  "job_codes": "[\"8711\"]"
+ },
+ {
+  "code": "4224",
+  "name": "제빵산업기사",
+  "grade": "산업기사",
+  "field_official": "식품.가공",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "91",
+  "job_codes": "[\"8711\"]"
+ },
+ {
+  "code": "7140",
+  "name": "가구제작기능사",
+  "grade": "기능사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "1",
+  "job_codes": "[\"8831\"]"
+ },
+ {
+  "code": "2142",
+  "name": "가구제작산업기사",
+  "grade": "산업기사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "2",
+  "job_codes": "[\"8831\"]"
+ },
+ {
+  "code": "7460",
+  "name": "귀금속가공기능사",
+  "grade": "기능사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "4",
+  "job_codes": "[\"8842\"]"
+ },
+ {
+  "code": "3770",
+  "name": "귀금속가공기능장",
+  "grade": "기능장",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "5",
+  "job_codes": "[\"8842\"]"
+ },
+ {
+  "code": "2760",
+  "name": "귀금속가공산업기사",
+  "grade": "산업기사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "6",
+  "job_codes": "[\"8842\"]"
+ },
+ {
+  "code": "7890",
+  "name": "도자공예기능사",
+  "grade": "기능사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "22",
+  "job_codes": "[\"8841\"]"
+ },
+ {
+  "code": "2391",
+  "name": "디지털인쇄산업기사",
+  "grade": "산업기사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "23",
+  "job_codes": "[\"8811\"]"
+ },
+ {
+  "code": "7480",
+  "name": "목공예기능사",
+  "grade": "기능사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "25",
+  "job_codes": "[\"8841\"]"
+ },
+ {
+  "code": "7889",
+  "name": "보석가공기능사",
+  "grade": "기능사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "30",
+  "job_codes": "[\"8842\"]"
+ },
+ {
+  "code": "2980",
+  "name": "보석감정산업기사",
+  "grade": "산업기사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "31",
+  "job_codes": "[\"8853\"]"
+ },
+ {
+  "code": "2880",
+  "name": "보석디자인산업기사",
+  "grade": "산업기사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "32",
+  "job_codes": "[\"8842\"]"
+ },
+ {
+  "code": "7795",
+  "name": "사진기능사",
+  "grade": "기능사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "34",
+  "job_codes": "[\"8812\"]"
+ },
+ {
+  "code": "6792",
+  "name": "석공예기능사",
+  "grade": "기능사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "35",
+  "job_codes": "[\"8841\"]"
+ },
+ {
+  "code": "7524",
+  "name": "인쇄기능사",
+  "grade": "기능사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "78",
+  "job_codes": "[\"8811\"]"
+ },
+ {
+  "code": "1391",
+  "name": "인쇄설계기사",
+  "grade": "기사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "79",
+  "job_codes": "[\"8811\"]"
+ },
+ {
+  "code": "6791",
+  "name": "전자출판기능사",
+  "grade": "기능사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "83",
+  "job_codes": "[\"8811\"]"
+ },
+ {
+  "code": "7917",
+  "name": "피아노조율기능사",
+  "grade": "기능사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "113",
+  "job_codes": "[\"8851\"]"
+ },
+ {
+  "code": "2551",
+  "name": "피아노조율산업기사",
+  "grade": "산업기사",
+  "field_official": "인쇄.목재.가구.공예",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "114",
+  "job_codes": "[\"8851\"]"
+ },
+ {
+  "code": "1601",
+  "name": "기상감정기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "15",
+  "job_codes": "[\"1551\"]"
+ },
+ {
+  "code": "1600",
+  "name": "기상기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "16",
+  "job_codes": "[\"1551\"]"
+ },
+ {
+  "code": "0891",
+  "name": "기상예보기술사",
+  "grade": "기술사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "17",
+  "job_codes": "[\"1555\"]"
+ },
+ {
+  "code": "0920",
+  "name": "대기관리기술사",
+  "grade": "기술사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "19",
+  "job_codes": "[\"1555\"]"
+ },
+ {
+  "code": "1661",
+  "name": "대기환경기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "20",
+  "job_codes": "[\"1556\"]"
+ },
+ {
+  "code": "2571",
+  "name": "대기환경산업기사",
+  "grade": "산업기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "21",
+  "job_codes": "[\"1556\"]"
+ },
+ {
+  "code": "0910",
+  "name": "방사선관리기술사",
+  "grade": "기술사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "29",
+  "job_codes": "[\"1557\"]"
+ },
+ {
+  "code": "1663",
+  "name": "소음진동기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "42",
+  "job_codes": "[\"1556\"]"
+ },
+ {
+  "code": "0940",
+  "name": "소음진동기술사",
+  "grade": "기술사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "43",
+  "job_codes": "[\"1555\"]"
+ },
+ {
+  "code": "2573",
+  "name": "소음진동산업기사",
+  "grade": "산업기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "44",
+  "job_codes": "[\"1556\"]"
+ },
+ {
+  "code": "0930",
+  "name": "수질관리기술사",
+  "grade": "기술사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "47",
+  "job_codes": "[\"1555\"]"
+ },
+ {
+  "code": "1662",
+  "name": "수질환경기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "48",
+  "job_codes": "[\"1556\"]"
+ },
+ {
+  "code": "2572",
+  "name": "수질환경산업기사",
+  "grade": "산업기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "49",
+  "job_codes": "[\"1556\"]"
+ },
+ {
+  "code": "7761",
+  "name": "에너지관리기능사",
+  "grade": "기능사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "59",
+  "job_codes": "[\"1551\"]"
+ },
+ {
+  "code": "3170",
+  "name": "에너지관리기능장",
+  "grade": "기능장",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "60",
+  "job_codes": "[\"1551\"]"
+ },
+ {
+  "code": "1340",
+  "name": "에너지관리기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "61",
+  "job_codes": "[\"1551\"]"
+ },
+ {
+  "code": "2960",
+  "name": "에너지관리산업기사",
+  "grade": "산업기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "62",
+  "job_codes": "[\"1551\"]"
+ },
+ {
+  "code": "1028",
+  "name": "온실가스관리기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "65",
+  "job_codes": "[\"1555\"]"
+ },
+ {
+  "code": "1330",
+  "name": "원자력기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "70",
+  "job_codes": "[\"1551\"]"
+ },
+ {
+  "code": "0880",
+  "name": "원자력발전기술사",
+  "grade": "기술사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "71",
+  "job_codes": "[\"1551\"]"
+ },
+ {
+  "code": "1938",
+  "name": "자연생태복원기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "80",
+  "job_codes": "[\"1555\"]"
+ },
+ {
+  "code": "2938",
+  "name": "자연생태복원산업기사",
+  "grade": "산업기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "81",
+  "job_codes": "[\"1555\"]"
+ },
+ {
+  "code": "0938",
+  "name": "자연환경관리기술사",
+  "grade": "기술사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "82",
+  "job_codes": "[\"1555\"]"
+ },
+ {
+  "code": "1948",
+  "name": "토양환경기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "98",
+  "job_codes": "[\"1555\"]"
+ },
+ {
+  "code": "0948",
+  "name": "토양환경기술사",
+  "grade": "기술사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "99",
+  "job_codes": "[\"1555\"]"
+ },
+ {
+  "code": "1950",
+  "name": "폐기물처리기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "105",
+  "job_codes": "[\"8532\"]"
+ },
+ {
+  "code": "0970",
+  "name": "폐기물처리기술사",
+  "grade": "기술사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "106",
+  "job_codes": "[\"1555\"]"
+ },
+ {
+  "code": "2950",
+  "name": "폐기물처리산업기사",
+  "grade": "산업기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "107",
+  "job_codes": "[\"8532\"]"
+ },
+ {
+  "code": "7918",
+  "name": "환경기능사",
+  "grade": "기능사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "123",
+  "job_codes": "[\"8531\"]"
+ },
+ {
+  "code": "1029",
+  "name": "환경위해관리기사",
+  "grade": "기사",
+  "field_official": "환경.에너지",
+  "field_group": "manufacturing",
+  "kind": "national_tech",
+  "rank": "124",
+  "job_codes": "[\"1556\"]"
+ },
+ {
+  "code": "1312",
+  "name": "서비스·경험디자인기사",
+  "grade": "기사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "3",
+  "job_codes": "[\"4155\"]"
+ },
+ {
+  "code": "1790",
+  "name": "시각디자인기사",
+  "grade": "기사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "4",
+  "job_codes": "[\"4154\"]"
+ },
+ {
+  "code": "2434",
+  "name": "시각디자인산업기사",
+  "grade": "산업기사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "5",
+  "job_codes": "[\"4154\"]"
+ },
+ {
+  "code": "7920",
+  "name": "영사기능사",
+  "grade": "기능사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "8",
+  "job_codes": "[\"4167\"]"
+ },
+ {
+  "code": "2047",
+  "name": "영사산업기사",
+  "grade": "산업기사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "9",
+  "job_codes": "[\"4167\"]"
+ },
+ {
+  "code": "7798",
+  "name": "웹디자인개발기능사",
+  "grade": "기능사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "10",
+  "job_codes": "[\"4155\"]"
+ },
+ {
+  "code": "1512",
+  "name": "제품디자인기사",
+  "grade": "기사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "13",
+  "job_codes": "[\"4151\"]"
+ },
+ {
+  "code": "0960",
+  "name": "제품디자인기술사",
+  "grade": "기술사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "14",
+  "job_codes": "[\"4151\"]"
+ },
+ {
+  "code": "2432",
+  "name": "제품디자인산업기사",
+  "grade": "산업기사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "15",
+  "job_codes": "[\"4151\"]"
+ },
+ {
+  "code": "6793",
+  "name": "제품응용모델링기능사",
+  "grade": "기능사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "16",
+  "job_codes": "[\"4151\"]"
+ },
+ {
+  "code": "1982",
+  "name": "컬러리스트기사",
+  "grade": "기사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "21",
+  "job_codes": "[\"4154\"]"
+ },
+ {
+  "code": "2982",
+  "name": "컬러리스트산업기사",
+  "grade": "산업기사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "22",
+  "job_codes": "[\"4154\"]"
+ },
+ {
+  "code": "7796",
+  "name": "컴퓨터그래픽기능사",
+  "grade": "기능사",
+  "field_official": "문화.예술.디자인.방송",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "23",
+  "job_codes": "[\"4155\"]"
+ },
+ {
+  "code": "7914",
+  "name": "복어조리기능사",
+  "grade": "기능사",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "1",
+  "job_codes": "[\"5315\"]"
+ },
+ {
+  "code": "2975",
+  "name": "복어조리산업기사",
+  "grade": "산업기사",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "2",
+  "job_codes": "[\"5315\"]"
+ },
+ {
+  "code": "7911",
+  "name": "양식조리기능사",
+  "grade": "기능사",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "6",
+  "job_codes": "[\"5314\"]"
+ },
+ {
+  "code": "2972",
+  "name": "양식조리산업기사",
+  "grade": "산업기사",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "7",
+  "job_codes": "[\"5314\"]"
+ },
+ {
+  "code": "7912",
+  "name": "일식조리기능사",
+  "grade": "기능사",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "11",
+  "job_codes": "[\"5315\"]"
+ },
+ {
+  "code": "2973",
+  "name": "일식조리산업기사",
+  "grade": "산업기사",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "12",
+  "job_codes": "[\"5315\"]"
+ },
+ {
+  "code": "3922",
+  "name": "조리기능장",
+  "grade": "기능장",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "17",
+  "job_codes": "[\"5311\"]"
+ },
+ {
+  "code": "7916",
+  "name": "조주기능사",
+  "grade": "기능사",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "18",
+  "job_codes": "[\"5316\"]"
+ },
+ {
+  "code": "7913",
+  "name": "중식조리기능사",
+  "grade": "기능사",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "19",
+  "job_codes": "[\"5313\"]"
+ },
+ {
+  "code": "2974",
+  "name": "중식조리산업기사",
+  "grade": "산업기사",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "20",
+  "job_codes": "[\"5313\"]"
+ },
+ {
+  "code": "7910",
+  "name": "한식조리기능사",
+  "grade": "기능사",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "24",
+  "job_codes": "[\"5312\"]"
+ },
+ {
+  "code": "2971",
+  "name": "한식조리산업기사",
+  "grade": "산업기사",
+  "field_official": "음식서비스",
+  "field_group": "food_service",
+  "kind": "national_tech",
+  "rank": "25",
+  "job_codes": "[\"5312\"]"
+ },
+ {
+  "code": "0950",
+  "name": "농화학기술사",
+  "grade": "기술사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "1",
+  "job_codes": "[\"9011\"]"
+ },
+ {
+  "code": "7645",
+  "name": "목재가공기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "2",
+  "job_codes": "[\"9031\"]"
+ },
+ {
+  "code": "1641",
+  "name": "버섯산업기사",
+  "grade": "산업기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "3",
+  "job_codes": "[\"9012\"]"
+ },
+ {
+  "code": "7631",
+  "name": "버섯종균기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "4",
+  "job_codes": "[\"9012\"]"
+ },
+ {
+  "code": "7632",
+  "name": "산림기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "5",
+  "job_codes": "[\"9031\"]"
+ },
+ {
+  "code": "9773",
+  "name": "산림기능장",
+  "grade": "기능장",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "6",
+  "job_codes": "[\"9031\"]"
+ },
+ {
+  "code": "1564",
+  "name": "산림기사",
+  "grade": "기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "7",
+  "job_codes": "[\"9031\"]"
+ },
+ {
+  "code": "0801",
+  "name": "산림기술사",
+  "grade": "기술사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "8",
+  "job_codes": "[\"9031\"]"
+ },
+ {
+  "code": "2481",
+  "name": "산림산업기사",
+  "grade": "산업기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "9",
+  "job_codes": "[\"9031\"]"
+ },
+ {
+  "code": "7700",
+  "name": "수산양식기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "10",
+  "job_codes": "[\"9041\"]"
+ },
+ {
+  "code": "1625",
+  "name": "수산양식기사",
+  "grade": "기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "11",
+  "job_codes": "[\"9041\"]"
+ },
+ {
+  "code": "0701",
+  "name": "수산양식기술사",
+  "grade": "기술사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "12",
+  "job_codes": "[\"9041\"]"
+ },
+ {
+  "code": "2520",
+  "name": "수산양식산업기사",
+  "grade": "산업기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "13",
+  "job_codes": "[\"9041\"]"
+ },
+ {
+  "code": "1780",
+  "name": "시설원예기사",
+  "grade": "기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "14",
+  "job_codes": "[\"9014\"]"
+ },
+ {
+  "code": "0841",
+  "name": "시설원예기술사",
+  "grade": "기술사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "15",
+  "job_codes": "[\"9014\"]"
+ },
+ {
+  "code": "1562",
+  "name": "식물보호기사",
+  "grade": "기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "16",
+  "job_codes": "[\"9011\"]"
+ },
+ {
+  "code": "2562",
+  "name": "식물보호산업기사",
+  "grade": "산업기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "17",
+  "job_codes": "[\"9011\"]"
+ },
+ {
+  "code": "7482",
+  "name": "식육처리기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "18",
+  "job_codes": "[\"9029\"]"
+ },
+ {
+  "code": "2631",
+  "name": "어로산업기사",
+  "grade": "산업기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "19",
+  "job_codes": "[\"9042\"]"
+ },
+ {
+  "code": "0702",
+  "name": "어업기술사",
+  "grade": "기술사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "20",
+  "job_codes": "[\"9042\"]"
+ },
+ {
+  "code": "1633",
+  "name": "어업생산관리기사",
+  "grade": "기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "21",
+  "job_codes": "[\"9042\"]"
+ },
+ {
+  "code": "7901",
+  "name": "원예기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "22",
+  "job_codes": "[\"9014\"]"
+ },
+ {
+  "code": "6592",
+  "name": "유기농업기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "23",
+  "job_codes": "[\"9011\"]"
+ },
+ {
+  "code": "1592",
+  "name": "유기농업기사",
+  "grade": "기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "24",
+  "job_codes": "[\"9011\"]"
+ },
+ {
+  "code": "2592",
+  "name": "유기농업산업기사",
+  "grade": "산업기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "25",
+  "job_codes": "[\"9011\"]"
+ },
+ {
+  "code": "1590",
+  "name": "임산가공기사",
+  "grade": "기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "26",
+  "job_codes": "[\"9031\"]"
+ },
+ {
+  "code": "7630",
+  "name": "임업종묘기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "27",
+  "job_codes": "[\"9031\"]"
+ },
+ {
+  "code": "1570",
+  "name": "임업종묘기사",
+  "grade": "기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "28",
+  "job_codes": "[\"9031\"]"
+ },
+ {
+  "code": "7620",
+  "name": "종자기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "29",
+  "job_codes": "[\"9012\"]"
+ },
+ {
+  "code": "1560",
+  "name": "종자기사",
+  "grade": "기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "30",
+  "job_codes": "[\"9012\"]"
+ },
+ {
+  "code": "0840",
+  "name": "종자기술사",
+  "grade": "기술사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "31",
+  "job_codes": "[\"9012\"]"
+ },
+ {
+  "code": "2470",
+  "name": "종자산업기사",
+  "grade": "산업기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "32",
+  "job_codes": "[\"9012\"]"
+ },
+ {
+  "code": "7481",
+  "name": "축산기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "33",
+  "job_codes": "[\"9029\"]"
+ },
+ {
+  "code": "1581",
+  "name": "축산기사",
+  "grade": "기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "34",
+  "job_codes": "[\"9029\"]"
+ },
+ {
+  "code": "0851",
+  "name": "축산기술사",
+  "grade": "기술사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "35",
+  "job_codes": "[\"9029\"]"
+ },
+ {
+  "code": "2491",
+  "name": "축산산업기사",
+  "grade": "산업기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "36",
+  "job_codes": "[\"9029\"]"
+ },
+ {
+  "code": "7646",
+  "name": "펄프종이제조기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "37",
+  "job_codes": "[\"9031\"]"
+ },
+ {
+  "code": "7625",
+  "name": "화훼장식기능사",
+  "grade": "기능사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "38",
+  "job_codes": "[\"9014\"]"
+ },
+ {
+  "code": "1576",
+  "name": "화훼장식기사",
+  "grade": "기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "39",
+  "job_codes": "[\"9014\"]"
+ },
+ {
+  "code": "2625",
+  "name": "화훼장식산업기사",
+  "grade": "산업기사",
+  "field_official": "농림어업",
+  "field_group": "agriculture_other",
+  "kind": "national_tech",
+  "rank": "40",
+  "job_codes": "[\"9014\"]"
+ }
+]
