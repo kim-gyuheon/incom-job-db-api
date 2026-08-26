@@ -34,10 +34,12 @@ _OPENAI_MODEL = os.environ.get("STT_MODEL", "whisper-1")
 
 # 2026-08-26: small(int8) 실측 결과 ct2 가중치 파일이 462MB(fp16, 로드 시 int8로
 # 양자화되어 절반가량인 ~230MB로 줄지만)라 Render 무료 플랜(512MB) 안에서 FastAPI/
-# uvicorn/sqlite 기본 오버헤드까지 더하면 여유가 거의 없다. base는 139MB(fp16, int8
-# 로드 시 ~70MB)로 훨씬 안전해서 기본값을 base로 낮춘다 — 대회 당일 데모 중 OOM으로
-# 죽는 것보다 인식 정확도를 조금 낮추는 쪽이 낫다는 판단.
-_WHISPER_MODEL_SIZE = os.environ.get("WHISPER_MODEL_SIZE", "base")
+# uvicorn/sqlite 기본 오버헤드까지 더하면 여유가 거의 없다 — 한때 base(139MB, int8
+# ~70MB)로 낮췄었는데, 실사용(마이크 음성) 테스트에서 base가 인식을 너무 자주
+# 놓쳐서 다시 small로 되돌림. OOM보다 인식 실패가 데모에 더 치명적이라는 판단 —
+# Render에서 실제로 메모리 부족이 나면 WHISPER_MODEL_SIZE=base로 대시보드에서
+# 바로 되돌릴 수 있다(코드 배포 없이 환경변수만 바꾸면 됨).
+_WHISPER_MODEL_SIZE = os.environ.get("WHISPER_MODEL_SIZE", "small")
 _WHISPER_DEVICE = os.environ.get("WHISPER_DEVICE", "cpu")
 _WHISPER_COMPUTE_TYPE = os.environ.get("WHISPER_COMPUTE_TYPE", "int8")
 
