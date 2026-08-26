@@ -177,10 +177,35 @@ def _transcribe_openai(audio_bytes: bytes, audio_format: str) -> Dict:
         )
 
     payload = response.json()
-    return {
-        "text": (payload.get("text") or "").strip(),
-        "confidence": _confidence_from_segments(payload.get("segments") or []),
-    }
+    segments = payload.get("segments") or []
+    text = (payload.get("text") or "").strip()
+    if _is_silence(segments):
+        # 무음이면 빈 문자열로 만들어 호출부가 no_speech로 응답하게 한다.
+        text = ""
+    return {"text": text, "confidence": _confidence_from_segments(segments)}
+
+
+# Whisper는 무음 구간에서 상투적인 문장을 만들어내는 경향이 있다(hallucination).
+# 2026-08-26 배포 서버 실측: 3초 무음 WAV -> "고맙습니다." 가 status=ok로 반환됨.
+# local(faster-whisper) 경로는 자체 VAD가 무음이면 세그먼트를 아예 만들지 않아 이 문제가
+# 없지만, openai 경로는 전사 텍스트가 그대로 넘어와서 걸러줄 곳이 여기밖에 없다.
+# verbose_json의 세그먼트별 no_speech_prob 평균으로 판정한다. 임계값을 0.7로 잡은 건
+# 실제 발화(같은 날 측정한 5문항: 2.9~7.3초 한국어)를 잘못 버리지 않도록 보수적으로
+# 둔 것 — 무음 hallucination은 보통 0.8을 넘고, 정상 발화는 0.5 아래다.
+NO_SPEECH_THRESHOLD = 0.7
+
+
+def _is_silence(segments) -> bool:
+    """세그먼트별 no_speech_prob 평균이 임계값을 넘으면 무음으로 본다."""
+    probs = [
+        s["no_speech_prob"]
+        for s in segments
+        if isinstance(s, dict) and s.get("no_speech_prob") is not None
+    ]
+    if not probs:
+        # 세그먼트가 아예 없으면 전사할 말이 없었다는 뜻이다.
+        return not segments
+    return (sum(probs) / len(probs)) >= NO_SPEECH_THRESHOLD
 
 
 def _confidence_from_segments(segments) -> Optional[float]:

@@ -107,3 +107,26 @@ def test_local_transcriber_loads_only_once_under_concurrent_requests(monkeypatch
 
     assert not errors, f"worker 스레드에서 예외 발생: {errors}"
     assert construct_count == 1, f"WhisperModel이 {construct_count}번 로드됨(1번이어야 함)"
+
+
+def test_openai_silence_is_filtered_to_no_speech():
+    """무음 구간에 Whisper가 만들어낸 문장은 걸러서 no_speech로 넘긴다.
+
+    2026-08-26 배포 서버 실측: 3초 무음 WAV에 "고맙습니다."가 status=ok로 반환됐다.
+    프런트 계약상 무음은 예시 문장이 아니라 no_speech여야 한다.
+    """
+    assert stt._is_silence([{"no_speech_prob": 0.94, "avg_logprob": -0.9}]) is True
+    assert stt._is_silence([{"no_speech_prob": 0.71}]) is True
+
+
+def test_openai_real_speech_is_not_filtered():
+    """정상 발화는 무음으로 오판하지 않는다(같은 날 측정한 5문항 수준의 값)."""
+    assert stt._is_silence([{"no_speech_prob": 0.02}, {"no_speech_prob": 0.11}]) is False
+    assert stt._is_silence([{"no_speech_prob": 0.69}]) is False
+
+
+def test_openai_missing_segments_treated_as_no_speech():
+    """세그먼트가 아예 없으면 전사할 말이 없었다는 뜻이다."""
+    assert stt._is_silence([]) is True
+    # no_speech_prob 필드를 주지 않는 응답이면 판단 근거가 없으니 텍스트를 살린다.
+    assert stt._is_silence([{"avg_logprob": -0.2}]) is False
