@@ -121,6 +121,34 @@ def test_barrier_exclusion_removes_matching_jobs(temp_job_db):
     assert not (returned_ids & excluded_by_night_shift)
 
 
+def test_aliased_barrier_tag_actually_excludes_jobs(temp_job_db):
+    """computer_work(우리 태그사전)은 CSV에서 computer_use라는 다른 이름으로 저장돼
+    있어서, BARRIER_ID_ALIASES로 이름을 맞춰야만 실제로 제외가 걸린다 — 페르소나
+    테스트로 발견한 회귀(이름이 안 맞아서 13개 barrier가 전부 무효였던 버그)의 재발 방지."""
+    with db_module.get_db() as db:
+        voice_engine.ensure_voice_engine_data(db)
+        excluded_by_computer_use = {
+            r["job_id"]
+            for r in db.execute(
+                "SELECT job_id FROM voice_job_barrier_excludes WHERE barrier_id = 'computer_use'"
+            )
+        }
+        assert excluded_by_computer_use, "computer_use로 제외되는 직무가 하나도 없으면 barrier CSV 적재가 잘못된 것"
+
+        positive = [
+            voice_engine.TagMatch(
+                tag_id="food_service", category="experience", label="식당·주방 일 경험", keywords=("주방",)
+            )
+        ]
+        # "computer_work"는 우리 태그사전 이름 — CSV의 실제 이름(computer_use)과 다르다.
+        items, is_fallback = voice_engine.score_and_rank(
+            db, positive, {"computer_work"}, set(), top_k=538
+        )
+
+    returned_ids = {item["job_id"] for item in items}
+    assert not (returned_ids & excluded_by_computer_use)
+
+
 def test_score_and_rank_falls_back_when_no_positive_signal(temp_job_db):
     """긍정 신호 태그가 하나도 없으면(영벡터) 코사인 유사도를 계산할 수 없어 폴백이어야 한다."""
     with db_module.get_db() as db:

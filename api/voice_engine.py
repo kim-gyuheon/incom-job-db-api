@@ -89,8 +89,37 @@ ALLOWED_EXCEPTIONS: set = {
                   # 불필요)으로 취득 가능해서 요양보호사와 같은 성격 (requires_cert=1)
 }
 
-# barrier 태그(우리 tag-keyword-dictionary.json)와 barrier-review-combined.csv의
-# barrier_id는 원래 같은 어휘라 별도 매핑이 필요 없다(skillmatch-voice-backend와 동일 데이터).
+# 2026-08-26: 위 주석(과거)은 barrier 태그(tag-keyword-dictionary.json, 16개)와
+# barrier-review-combined.csv의 barrier_id(12개)가 같은 어휘라고 적어놨었는데 실제로는
+# 아니었다 — 페르소나 테스트로 발견: 이름이 정확히 겹치는 3개(lift_heavy/stand_long/
+# night_shift)만 실제로 제외가 걸리고, 나머지 13개는 barrier_id 자체가 다르게 불려서
+# voice_job_barrier_excludes 조회에서 단 하나도 안 걸렸다(예: computer_work으로 추출된
+# 태그가 실제로는 CSV의 computer_use라는 이름으로 241개 직업 제외 데이터를 갖고 있는데,
+# 이름이 안 맞아서 그 데이터가 통째로 무시됨). 아래 매핑으로 이름을 맞춰서 살린다.
+# CSV 쪽에 대응 항목 자체가 없는 5개(walk_long/bend_often/fast_pace/cold_hot_env/
+# customer_conflict — customer_conflict는 customer_facing으로 근사 매핑)는 여전히 실제
+# 제외 데이터가 없어서 매핑해도 효과가 없다 — barrier-review 데이터 자체를 새로 만들어야
+# 하는 후속 과제.
+BARRIER_ID_ALIASES: Dict[str, str] = {
+    "customer_contact_avoid": "customer_facing",
+    "customer_conflict": "customer_facing",  # CSV에 정확히 대응하는 항목이 없어 근사 매핑
+    "fine_hand_work": "fine_hand",
+    "computer_work": "computer_use",
+    "outdoor_avoid": "outdoor",
+    "height_avoid": "high_place",
+    "public_speaking_avoid": "speak_public",
+    "drive_avoid": "drive_vehicle",
+    "early_morning_avoid": "early_morning",
+}
+
+
+def _to_csv_barrier_ids(barrier_tag_ids: set) -> set:
+    """우리 태그사전 barrier_id를 barrier-review-combined.csv의 barrier_id로 변환한다.
+
+    매핑에 없는 건(lift_heavy/stand_long/night_shift처럼 원래 이름이 같은 것 포함) 그대로
+    통과시킨다 — BARRIER_ID_ALIASES.get(x, x).
+    """
+    return {BARRIER_ID_ALIASES.get(bid, bid) for bid in barrier_tag_ids}
 
 
 def _catalog_source() -> FileCatalogSource:
@@ -230,6 +259,67 @@ def extract_positive_and_barrier(text: str) -> Tuple[List[TagMatch], List[TagMat
 
 # --- 추천 -------------------------------------------------------------------
 
+# 2026-08-26: 82축 코사인 유사도가 후보 전체(320여 개)에서 0.80~0.99 구간에 뭉쳐서
+# 구별력이 약하다는 걸 페르소나 테스트로 확인함(예: 순수 사무 경력 하나만 줘도 top5의
+# 절반이 사무직과 무관한 업종). 원본 엔진(engine/matching_engine.py)은 손대지 않고,
+# recommend()가 이미 제공하는 adjust 콜백으로 "실제로 답변에서 매칭된 경험 태그의
+# 업종과 후보의 KECO 카테고리가 겹치면" 유사도에 소폭 가산점을 준다 — 완전 재설계
+# 없이 순위만 다듬는 최소 침습적 조치. 프론트엔드 응답 스키마는 그대로다.
+EXPERIENCE_CATEGORY_BOOST: Dict[str, tuple] = {
+    "food_service": ("음식 서비스직",),
+    "cleaning": ("청소 및 기타 개인서비스직",),
+    "security": ("경호·경비직",),
+    "caregiving": ("청소 및 기타 개인서비스직",),  # 요양보호사·간병인이 이 cat2에 있음
+    "driving_delivery": ("운전·운송직",),
+    "retail_sales": ("영업·판매직",),
+    "factory_light": ("설치·정비·생산직",),
+    "farming": ("농림어업직",),
+    "office_admin": ("경영·행정·사무직",),
+    "childcare": ("보육", "육아"),
+    "tech_office_ok": ("경영·행정·사무직",),  # condition 태그지만 사무직과 직결
+}
+CATEGORY_BOOST_AMOUNT = 0.05
+
+
+def _category_boost_lookup(db, job_ids: List[int]) -> Dict[int, str]:
+    """job_id -> "cat1 cat2 cat3" 합친 문자열(부분일치 검사용)."""
+    if not job_ids:
+        return {}
+    placeholders = ",".join("?" for _ in job_ids)
+    rows = db.execute(
+        f"""
+        SELECT j.id AS id, c1.name AS cat1, c2.name AS cat2, c3.name AS cat3
+          FROM jobs j
+          JOIN job_categories c3 ON c3.id = j.category_id
+          JOIN job_categories c2 ON c2.id = c3.parent_id
+          JOIN job_categories c1 ON c1.id = c2.parent_id
+         WHERE j.id IN ({placeholders})
+        """,
+        job_ids,
+    ).fetchall()
+    return {r["id"]: f"{r['cat1']} {r['cat2']} {r['cat3']}" for r in rows}
+
+
+def _make_category_boost_adjuster(
+    positive_matches: List[TagMatch], category_by_id: Dict[int, str]
+):
+    """매칭된 경험 태그의 업종과 후보 카테고리가 겹치면 가산점을 주는 adjust 콜백."""
+    boost_terms = set()
+    for m in positive_matches:
+        boost_terms.update(EXPERIENCE_CATEGORY_BOOST.get(m.tag_id, ()))
+    if not boost_terms:
+        return None
+
+    def adjust(similarities: np.ndarray, job_ids) -> np.ndarray:
+        adjusted = similarities.copy()
+        for i, jid in enumerate(job_ids):
+            category_text = category_by_id.get(jid, "")
+            if any(term in category_text for term in boost_terms):
+                adjusted[i] += CATEGORY_BOOST_AMOUNT
+        return adjusted
+
+    return adjust
+
 
 def score_and_rank(
     db,
@@ -253,12 +343,13 @@ def score_and_rank(
     vectors = np.array([json.loads(r["vector_json"]) for r in rows], dtype=float)
 
     if barrier_tag_ids:
+        csv_barrier_ids = _to_csv_barrier_ids(barrier_tag_ids)
         excluded = {
             r["job_id"]
             for r in db.execute(
                 "SELECT DISTINCT job_id FROM voice_job_barrier_excludes "
-                "WHERE barrier_id IN (%s)" % ",".join("?" for _ in barrier_tag_ids),
-                tuple(barrier_tag_ids),
+                "WHERE barrier_id IN (%s)" % ",".join("?" for _ in csv_barrier_ids),
+                tuple(csv_barrier_ids),
             )
         }
     else:
@@ -277,7 +368,9 @@ def score_and_rank(
         # 긍정 신호가 하나도 안 잡힘 — 코사인 유사도 계산이 불가능하므로 폴백으로 넘긴다.
         return [], True
 
-    result = engine_recommend(user_vector, kept_ids, kept_vectors, top_k=top_k)
+    category_by_id = _category_boost_lookup(db, kept_ids)
+    adjust = _make_category_boost_adjuster(positive_matches, category_by_id)
+    result = engine_recommend(user_vector, kept_ids, kept_vectors, top_k=top_k, adjust=adjust)
 
     matched_keywords = list(
         dict.fromkeys(kw for m in positive_matches for kw in m.keywords)
