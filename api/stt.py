@@ -137,7 +137,12 @@ def _transcribe_local(audio_bytes: bytes) -> Dict:
         tmp.write(audio_bytes)
         tmp.flush()
         tmp.close()
-        segments, info = _local_transcriber.transcribe(tmp.name, language="ko")
+        # vad_filter=True: 침묵/노이즈 구간을 먼저 걸러내고 음성이 있는 구간만 전사한다.
+        # 꺼져 있으면 마이크 잡음이나 침묵에서 whisper가 없는 말을 지어내는(hallucination)
+        # 경우가 늘어나 실제 마이크 입력에서 체감 품질이 떨어진다 — 비용/메모리 영향 없음.
+        segments, info = _local_transcriber.transcribe(
+            tmp.name, language="ko", vad_filter=True
+        )
         segment_list = list(segments)
     except Exception as exc:  # pragma: no cover - dependency boundary
         raise SttError("STT_FAILED", "음성 인식에 실패했습니다: %s" % exc)

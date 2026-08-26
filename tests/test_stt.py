@@ -83,7 +83,7 @@ def test_local_transcriber_loads_only_once_under_concurrent_requests(monkeypatch
             with construct_lock:
                 construct_count += 1
 
-        def transcribe(self, path, language="ko"):
+        def transcribe(self, path, language="ko", vad_filter=False):
             return [], FakeInfo()
 
     fake_module = types.ModuleType("faster_whisper")
