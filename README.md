@@ -24,9 +24,8 @@ STT_PROVIDER=mock uvicorn main:app --reload
 ```
 
 `STT_PROVIDER=mock`은 마이크 없이 질문별 고정 문장으로 전체 흐름을 빠르게 확인할 때 쓴다.
-실제 음성 인식까지 로컬에서 보려면 `STT_PROVIDER=local`로 띄우면 된다(첫 요청 때
-whisper 모델을 자동으로 받아온다 — 인터넷 필요, 몇 분 걸릴 수 있음). 서버가 뜨면
-`http://127.0.0.1:8000/docs`에서 API 문서를 바로 볼 수 있다.
+실제 음성 인식까지 로컬에서 보려면 `STT_PROVIDER=openai`(+`OPENAI_API_KEY`)로 띄우면
+된다. 서버가 뜨면 `http://127.0.0.1:8000/docs`에서 API 문서를 바로 볼 수 있다.
 
 ## 폴더 구조
 
@@ -39,7 +38,7 @@ api/                음성 상담 + 직무 조회 API 본체
   voice_llm.py           G(자격증) 태그 추출, 추천 이유 문장 생성(Claude 선택적)
   tagging.py               C/D/E/F 답변에서 태그를 뽑는 규칙 기반 정규식 추출기
   vectorizing.py             태그 -> 82축 벡터 변환
-  stt.py                      음성 -> 텍스트 변환 (local/openai/mock)
+  stt.py                      음성 -> 텍스트 변환 (openai/mock)
   db.py, models.py             SQLite 커넥션, /api/jobs 조회 SQL, pydantic 스키마
 
 engine/             538개 직무의 82축 벡터·barrier 데이터를 다루는 매칭 엔진
@@ -116,14 +115,14 @@ D/E/F에서 뽑힌 태그를 82축(성격 16 + 지식중요도 33 + 지식수준
 
 | 값 | 동작 | 비용 |
 | --- | --- | --- |
-| `local` (기본값) | `faster-whisper`를 같은 프로세스에서 직접 실행 | 없음 |
-| `openai` | `OPENAI_API_KEY`로 Whisper API 호출 | 요청당 과금 |
+| `openai` (기본 운영 방식) | `OPENAI_API_KEY`로 Whisper API 호출 | 요청당 과금 |
 | `mock` | 질문별 고정 문장 반환 | 없음(테스트용) |
 | 미설정 | `STT_UNAVAILABLE`(503) 오류 | - |
 
-실사용(키오스크에서 계속 말할 때마다) 시 비용이 쌓이는 걸 피하려고 `local`을 기본값으로
-쓴다. `local`이 메모리 제약(예: Render 무료 플랜 512MB)으로 안 되는 환경에서는 `openai`로
-대체할 수 있다.
+2026-08-26: 원래는 과금을 피하려고 `faster-whisper`를 같은 프로세스에서 직접 돌리는
+`local` 경로가 기본값이었다. Render 무료 플랜 메모리 한도(512MB)와 실사용(마이크) 인식
+품질 사이에서 계속 트레이드오프에 시달린 끝에 `openai`로 완전히 전환하기로 결정하고
+`local` 경로/`faster-whisper` 의존성 자체를 코드에서 제거했다.
 
 ## API 오류 형식
 
@@ -147,9 +146,8 @@ D/E/F에서 뽑힌 태그를 82축(성격 16 + 지식중요도 33 + 지식수준
 
 `api/.env.example` 참고. 전부 선택사항이며, 안 넣으면 규칙 기반 폴백으로 동작한다.
 
-- `STT_PROVIDER` — `local`(권장) / `openai` / `mock`. 미설정 시 음성 답변이 503을 반환.
-- `WHISPER_MODEL_SIZE`, `WHISPER_DEVICE`, `WHISPER_COMPUTE_TYPE` — `STT_PROVIDER=local` 튜닝용(기본 `small`/`cpu`/`int8`).
-- `OPENAI_API_KEY`, `STT_MODEL` — `STT_PROVIDER=openai`일 때 필요.
+- `STT_PROVIDER` — `openai`(기본 운영 방식) / `mock`. 미설정 시 음성 답변이 503을 반환.
+- `OPENAI_API_KEY`, `STT_MODEL` — `STT_PROVIDER=openai`일 때 필요(기본 경로라 사실상 필수).
 - `ANTHROPIC_API_KEY` — G(자격증) 태그 추출과 추천 이유 문장 생성에 보조로 사용. 없으면 규칙 기반으로 동작.
 
 ## 테스트
@@ -195,10 +193,8 @@ pytest tests/ -q
   9개는 `BARRIER_ID_ALIASES`로 다시 연결했다. CSV 쪽에 대응 항목 자체가 없는 5개
   (walk_long/bend_often/fast_pace/cold_hot_env/customer_conflict)는 여전히 실제
   제외 데이터가 없다 — barrier-review 데이터를 새로 만들어야 하는 후속 과제.
-- `WHISPER_MODEL_SIZE`를 `small`→`base`로 낮췄다가(메모리 안전 목적) 실사용(마이크)
-  테스트에서 인식을 너무 자주 놓쳐서 다시 `small`로 되돌렸다 — Render 무료 플랜
-  (512MB) 안에서 여유가 빠듯하다(small의 ct2 가중치 462MB, int8 로드 시 ~230MB).
-  OOM이 나면 대시보드에서 `WHISPER_MODEL_SIZE=base`(또는 `tiny`)로 코드 배포 없이
-  바로 낮추거나 `openai`로 전환을 검토한다.
+- STT를 `local`(faster-whisper, 무과금)에서 `openai`(요청당 과금)로 완전히 전환했다 —
+  Render 무료 플랜 메모리 한도와 실사용 인식 품질 사이의 트레이드오프에서 벗어나기
+  위한 결정. 실사용량이 늘어나면 과금이 쌓인다는 점은 감안해야 한다.
 - `sessionId`가 URL 경로에 있어서 표준 웹서버 접근 로그에 남는다 — 세션이 최대 1200초
   짜리 단기값이라는 전제로 낮은 위험으로 보고 있다.

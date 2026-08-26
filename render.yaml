@@ -12,33 +12,21 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.11.9"
-      # 아래 세 개는 값을 저장소에 두지 않고 Render 대시보드에서 직접 입력한다.
-      # STT_PROVIDER    : 음성 -> 텍스트 공급자. local(권장, 과금 없음) | openai | mock
-      #                   local = faster-whisper를 같은 프로세스에서 직접 실행(비용 정책상
-      #                     기본값으로 정함). 2026-08-26에 실측: Systran/faster-whisper 모델의
-      #                     ct2 가중치 파일(fp16) 크기가 small=462MB, base=139MB, tiny=73MB —
-      #                     int8 로드 시 대략 절반(각각 ~230/~70/~37MB). base로 낮춰봤는데
-      #                     실사용(마이크) 테스트에서 인식을 너무 자주 놓쳐서 기본값을 다시
-      #                     small로 되돌렸다(api/stt.py 참고) — Render 무료 플랜(512MB)에서
-      #                     여유가 빠듯하니 OOM이 나면 대시보드에서 WHISPER_MODEL_SIZE=base
-      #                     또는 tiny로 바로 낮추거나(코드 배포 불필요) 유료 플랜을 검토할 것.
-      #                   openai = OPENAI_API_KEY로 Whisper API 호출(요청당 과금) — local이
-      #                     메모리 문제로 안 될 때만 쓰는 대안.
+      # 아래 값들은 저장소에 두지 않고 Render 대시보드에서 직접 입력한다.
+      # STT_PROVIDER    : 음성 -> 텍스트 공급자. openai | mock
+      #                   openai = OPENAI_API_KEY로 Whisper API 호출(요청당 과금). 2026-08-26:
+      #                     원래는 과금을 피하려고 faster-whisper를 같은 프로세스에서 직접
+      #                     돌리는 local 경로가 기본이었는데, Render 무료 플랜 메모리 한도와
+      #                     실사용 인식 품질 사이에서 계속 트레이드오프에 시달려서 openai로
+      #                     완전히 전환하기로 결정 — local 경로/faster-whisper 의존성 자체를
+      #                     코드에서 제거했다(api/stt.py 참고).
       #                   mock = 고정 문장 반환. 마이크·과금 없이 흐름만 볼 때.
-      # OPENAI_API_KEY  : STT_PROVIDER=openai일 때만 필요(기본 경로는 아님)
-      # WHISPER_MODEL_SIZE / WHISPER_DEVICE / WHISPER_COMPUTE_TYPE : STT_PROVIDER=local 튜닝용
-      #                   (기본 small/cpu/int8 — api/stt.py 참고)
+      # OPENAI_API_KEY  : STT_PROVIDER=openai일 때 필수(기본 운영 경로).
       # ANTHROPIC_API_KEY: 키워드 추출/추천 이유 생성 보조용(선택). 안 넣으면 규칙 기반으로만
       #                   동작한다(요청당 과금 없음) — 비용 정책상 기본은 안 넣는 쪽으로 정함.
       - key: STT_PROVIDER
         sync: false
       - key: OPENAI_API_KEY
-        sync: false
-      - key: WHISPER_MODEL_SIZE
-        sync: false
-      - key: WHISPER_DEVICE
-        sync: false
-      - key: WHISPER_COMPUTE_TYPE
         sync: false
       - key: ANTHROPIC_API_KEY
         sync: false
